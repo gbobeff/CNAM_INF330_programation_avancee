@@ -77,19 +77,146 @@
 				</section>
 				-->
 				<section>
-
 					<h2>Comment ça marche?</h2>
-					<p>
-                        
-					</p>
+					<img src="img/java_compilation_scheme.drawio.png">
+				</section>
+				<!-- JAVA : Notions de base -->
+				<section>
+					<section>
+						<h2>Notions de base</h2>
+						<ul>
+							<li>Class</li>
+							<li>Héritage</li>
+							<li>Interface</li>
+							<li>Polymorphisme</li>
+							<li>Generics</li>
+							<li>Main</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Classe</h2>
+						<span style="font-size: 30px;">
+						<!--
+						<ul>
+							<li>Classe (ou type d'objets) : décrit des "choses" ayant les mêmes propriétés</li>
+							<li>Object : une instance d'une classe</li>
+						</ul>
+						-->
+						<p>Une classe est une représentation abstraite d'un objet.</p>
+						<p>Pour java, tout est décrit en terme de classes et d'objet ... pas d'autre notion ...</p>
+					</span>
+					</section>
+					<section>
+						<h4>Classe : structure</h4>
+						<ul style="font-size: 20px;">
+							<li><b style="color: crimson;">champs</b> (ou attribut) : l'ensemble des membres définissant l'état d'un objet</li>
+							<li><b style="color: crimson;">méthodes</b> : une action (fonction, procédure) qui manipule l’état d’un objet</li>
+							<li><b style="color: crimson;">modificateurs d'accès</b> : une action (fonction, procédure) qui manipule l’état d’un objet</li>
+							<ul>
+								<li> <span style="color: dodgerblue;">public</span>  : l’accès est possible depuis toute classe du même package</li>
+								<li> <span style="color: dodgerblue;">protected</span> : l’accès est possible depuis toute classe du même package et toute classe fille</li>
+								<li><span style="color: dodgerblue;">private</span> : l’accès n’est possible que dans la classe elle-même</li>
+							</ul>
+							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+								package monpkg;
+								
+								public class Voiture {
+
+									int  compteur;
+									String immat ;  
+							
+									void rouler (int km) { ... }
+							
+									boolean changerPneu () { ... }        
+								
+									void afficherAttributs() { ... }
+								}
+							</code></pre>							
+						</ul>
+					</section>
+					<section>
+						<h2>Héritage</h2>
+						<span style="font-size: 18px;">
+							<p>L’Héritage permet de définir de nouvelles classes à partir de classes existantes.</p>
+							<p>On utilise le mot clé <b style="color: crimson;">extends</b> pour indiquer qu'une classe hérite d'une autre.</p>
+						</span>
+						<span style="font-size: 18px;">
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							package monpkg;
+
+							public class VoitureElectrique extends Voiture {
+
+								int  nbBatterie;
+						
+								int chargeDisponible () { ... }
+ 
+							}
+						</code></pre>
+						</span>
+						<ul style="font-size: 18px;">
+							<li>Si des méthodes de la classe <b style="color: crimson;">VoitureElectrique</b> (obtenue par héritage de <b style="color: crimson;">Voiture</b>) ont le même nom que certaines existant
+								dans <b style="color: crimson;">Voiture</b>, elles viennent les cacher (<b style="color: crimson;">surcharge</b>). </li>
+							<li>Pour appeler une méthode de <b style="color: crimson;">Voiture</b> dans <b style="color: crimson;">VoitureElectrique</b> il faut la préfixer par <b style="color: crimson;">super</b>.</li>
+						</ul>
+						<span style="font-size: 18px;">
+							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+								package monpkg;
+	
+								public class VoitureElectrique extends Voiture {
+	
+									int  nbBatterie;
+							
+									int chargeDisponible () { ... }
+
+									@override
+									void afficherAttributs() { 
+										// Changer l'affichage/mode/... faire quelque chose de différent!
+										super.afficherAttributs(); 
+									}
+								}
+						</code></pre>
+						</span>	
+						<ul style="font-size: 18px;">
+							<li>Une classe qui hérite d'une autre est une sous-classe et celle dont elle hérite est une super-classe.</li>
+							<li>Une classe peut avoir plusieurs sous-classes.</li>
+							<li>Une classe ne peut avoir qu'une seule classe mère : il n'y a pas d'héritage multiple en Java.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Interface</h2>
+
+						<span style="font-size: 20px;">
+							<ul>
+							<li>Une interface est une classe abstraite sans données qui ne peut servir qu’à être adjointe à d’autres classes.</li>
+							<li>Avec l'héritage multiple, une classe peut hériter en même temps de plusieurs super-classes. Ce mécanisme n'existe pas en Java.</li>
+							
+							<li>Les interfaces permettent de mettre en oeuvre un mécanisme de remplacement.</li>
+
+							<li>Une interface est une sorte de standard auquel une classe peut répondre.</li> 
+							<li>Tous les objets qui se conforment à cette interface (qui implémentent cette interface) possèdent les méthodes et les constantes déclarées dans celle-ci.</li> 
+							
+							<li>Plusieurs interfaces peuvent être implémentées dans une même classe.</li>
+							
+							<li>Les interfaces se déclarent avec le mot clé interface et sont intégrées aux autres classes avec le mot clé implements. Une interface est implicitement déclarée avec le modificateur abstract.</li>
+							</ul>
+						</span>
+					</section>										
+					<section>
+						<h2>Polymorphisme</h2>
+						<span style="font-size: 20px;">
+							<ul>
+							<li>Un objet de classe B dérivée de A peut être utilisé partout où un objet de A peut l’être. Si une méthode de A a été	redéfinie dans B on utilisera celle de B.</li>
+							<li>A quoi sert le polymorphisme ?
+								Si on définit une classe L qui est une liste d’objets de classe A, on pourra mettre dans cette liste des objets de
+								n’importe quelle classe à partir du moment où elle est hérité de A.	</li>
+					
+							</ul>
+						</span>						
+						
+					</section>
 				</section>
 				<section>
-
-					<h2>Notions de base</h2>
-					<ul>
-						<li>Class</li>
-						<li>Interface</li>
-					</ul>
+					<h2></h2>
 				</section>
 			</div>
 
