@@ -89,8 +89,7 @@
 							<li>Héritage</li>
 							<li>Interface</li>
 							<li>Polymorphisme</li>
-							<li>Generics</li>
-							<li>Main</li>
+							<li>méthode "main"</li>
 						</ul>
 					</section>
 					<section>
@@ -111,7 +110,7 @@
 						<ul style="font-size: 20px;">
 							<li><b style="color: crimson;">champs</b> (ou attribut) : l'ensemble des membres définissant l'état d'un objet</li>
 							<li><b style="color: crimson;">méthodes</b> : une action (fonction, procédure) qui manipule l’état d’un objet</li>
-							<li><b style="color: crimson;">modificateurs d'accès</b> : une action (fonction, procédure) qui manipule l’état d’un objet</li>
+							<li><b style="color: crimson;">modificateurs d'accès des membres</b> :</li>
 							<ul>
 								<li> <span style="color: dodgerblue;">public</span>  : l’accès est possible depuis toute classe du même package</li>
 								<li> <span style="color: dodgerblue;">protected</span> : l’accès est possible depuis toute classe du même package et toute classe fille</li>
@@ -131,8 +130,57 @@
 								
 									void afficherAttributs() { ... }
 								}
-							</code></pre>							
+							</code></pre>
+							<li><b style="color: crimson;">modificateurs des classes</b> :</li>
+							<ul>
+								<li> <span style="color: dodgerblue;">public</span>  : permet à une classe d'être visible dans tout le code sans aucune restriction.</li>
+								<li> <span style="color: dodgerblue;">package</span> : permet à une classe d'être visible à l'intérieur de son package uniquement.</li>
+								<li><span style="color: dodgerblue;">abstract</span> : est une classe template qui déclare des méthodes (peuvent être abstraites à leurs tours) ; elle permet ainsi à d'autres classes de s'en servir (en héritant de cette classe) pour définir un comportement spécialisé.</li>
+								<li><span style="color: dodgerblue;">final</span> : empêche une classe d'être héritée, ce qui veut dire que son comportement ne peut être modifié.</li>
+							</ul>
 						</ul>
+					</section>
+					<section>
+						<h4>Classe : exemple</h4>
+						<table>
+							<tr>
+								<td>
+									<img src="img/uml_TexFile_class.png"/>
+								</td>
+								<td style="vertical-align: top;width: 60%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class TextFile {
+				
+												String content
+												String name;
+										
+												public TextFile(name : String) {
+													this.name = name;
+												}
+			
+												public void addContent(content : String) {
+													this.content = this.content + content;
+												}
+			
+												public void open() {
+													//TODO : ouvrir le fichier
+												}
+			
+												public String replace(content : String) {
+													return this.content = content
+												}
+			
+												public int size() {
+													this.content = content
+												}
+				 
+											}
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>
 					</section>
 					<section>
 						<h2>Héritage</h2>
@@ -188,11 +236,7 @@
 						<span style="font-size: 20px;">
 							<ul>
 							<li>Une interface est une classe abstraite sans données qui ne peut servir qu’à être adjointe à d’autres classes.</li>
-							<li>Avec l'héritage multiple, une classe peut hériter en même temps de plusieurs super-classes. Ce mécanisme n'existe pas en Java.</li>
-							
 							<li>Les interfaces permettent de mettre en oeuvre un mécanisme de remplacement.</li>
-
-							<li>Une interface est une sorte de standard auquel une classe peut répondre.</li> 
 							<li>Tous les objets qui se conforment à cette interface (qui implémentent cette interface) possèdent les méthodes et les constantes déclarées dans celle-ci.</li> 
 							
 							<li>Plusieurs interfaces peuvent être implémentées dans une même classe.</li>
@@ -214,6 +258,14 @@
 						</span>						
 						
 					</section>
+				</section>				
+				<section>
+					<h2> notions ... pas de trop de base ...</h2>
+					<ul>
+						<li>Generics</li>
+						<li>Expressions lambda</li>
+						<li>Stream (flux)</li>
+					</ul>					
 				</section>
 				<section>
 					<h2></h2>
