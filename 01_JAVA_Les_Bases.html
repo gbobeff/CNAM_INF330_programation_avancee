@@ -88,8 +88,8 @@
 							<li>Class</li>
 							<li>Héritage</li>
 							<li>Interface</li>
+							<li>Instanciation</li>
 							<li>Polymorphisme</li>
-							<li>méthode "main"</li>
 						</ul>
 					</section>
 					<section>
@@ -116,21 +116,23 @@
 								<li> <span style="color: dodgerblue;">protected</span> : l’accès est possible depuis toute classe du même package et toute classe fille</li>
 								<li><span style="color: dodgerblue;">private</span> : l’accès n’est possible que dans la classe elle-même</li>
 							</ul>
-							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-								package monpkg;
-								
-								public class Voiture {
+							<!--
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									package monpkg;
+									
+									public class Voiture {
 
-									int  compteur;
-									String immat ;  
-							
-									void rouler (int km) { ... }
-							
-									boolean changerPneu () { ... }        
+										int  compteur;
+										String immat ;  
 								
-									void afficherAttributs() { ... }
-								}
-							</code></pre>
+										void rouler (int km) { ... }
+								
+										boolean changerPneu () { ... }        
+									
+										void afficherAttributs() { ... }
+									}
+								</code></pre>
+							-->
 							<li><b style="color: crimson;">modificateurs des classes</b> :</li>
 							<ul>
 								<li> <span style="color: dodgerblue;">public</span>  : permet à une classe d'être visible dans tout le code sans aucune restriction.</li>
@@ -138,7 +140,43 @@
 								<li><span style="color: dodgerblue;">abstract</span> : est une classe template qui déclare des méthodes (peuvent être abstraites à leurs tours) ; elle permet ainsi à d'autres classes de s'en servir (en héritant de cette classe) pour définir un comportement spécialisé.</li>
 								<li><span style="color: dodgerblue;">final</span> : empêche une classe d'être héritée, ce qui veut dire que son comportement ne peut être modifié.</li>
 							</ul>
+							<li><span style="color: crimson;">constructeur</span> : Le constructeur est une méthode appelée lors de la création de l’objet (utilisation de new). Il porte le même nom
+								que la classe et peut accepter des paramètres.</li>
+							<li><span style="color: crimson;">nom de l'instance</span> : Lorsque l’on est dans une méthode d’un objet le nom <span style="color: crimson;">this</span> est toujours un nom de cet objet.
 						</ul>
+					</section>
+					<section>
+						<h4>Classe : Types de données</h4>
+							<ul style="font-size: 20px;">
+								<li>Types primitifs</li>
+									<img src="img/java_types_primitifs.png" width="40%" height="40%">
+								<li>Tableaux et matrices</li>
+									<p>Il est possible de définir des tableaux d’objets ou de types primitifs. Le dimensionnement du tableau se fait lors
+										de sa création par new et non lors de la déclaration de son nom.</p>
+										<span style="font-size: 18px;">
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												int[] mon_tableau ;
+												int mon_tableau2[];
+
+												int[] mon_tableau = new int[20];
+
+												int[][] ma_matrice;
+											</code></pre>
+										</span>											
+								<li>Chaînes de caractères</li>
+									<p>Les chaînes de caractères ne sont pas considérées en Java comme un type primitif ou comme un
+										tableau. On utilise une classe particulière, nommée <b style="color: crimson;">String</b></p>
+										<span style="font-size: 18px;">
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												String s1 = ”hello” ;
+												String s2 = ”world” ;
+												String s3 = s1 + ” ” + s2 ;
+
+												String s4 = new String(); //pour une chaine vide
+												String s5 = new String(”hello world”);
+											</code></pre>
+										</span>											
+							</ul>
 					</section>
 					<section>
 						<h4>Classe : exemple</h4>
@@ -172,9 +210,8 @@
 												}
 			
 												public int size() {
-													this.content = content
+													return this.content.length();
 												}
-				 
 											}
 										</code></pre>
 									</span>	
@@ -188,6 +225,67 @@
 							<p>L’Héritage permet de définir de nouvelles classes à partir de classes existantes.</p>
 							<p>On utilise le mot clé <b style="color: crimson;">extends</b> pour indiquer qu'une classe hérite d'une autre.</p>
 						</span>
+
+						<table>
+							<tr>
+								<td>
+									<img src="img/uml_DesktopItem_TextFile_classes.png"/>
+								</td>
+								<td style="vertical-align: top;width: 40%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class DesktopItem {
+				
+												String name;
+										
+												public DesktopItme(name : String) {
+													this.name = name;
+												}
+			
+												public String getName() {
+													return this.name;
+												}
+			
+												public void rename(String name) {
+													this.name = name;
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 40%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class TextFile extends DesktopItem {
+				
+												String content
+										
+												public TextFile(name : String) {
+													this.name = name;
+												}
+			
+												public void addContent(content : String) {
+													this.content = this.content + content;
+												}
+			
+												public void open() {
+													//TODO : ouvrir le fichier
+												}
+			
+												public String replace(content : String) {
+													return this.content = content
+												}
+			
+												public int size() {
+													return this.content.length();
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>						
+						<!--
 						<span style="font-size: 18px;">
 						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
 							package monpkg;
@@ -201,11 +299,13 @@
 							}
 						</code></pre>
 						</span>
+						-->
 						<ul style="font-size: 18px;">
-							<li>Si des méthodes de la classe <b style="color: crimson;">VoitureElectrique</b> (obtenue par héritage de <b style="color: crimson;">Voiture</b>) ont le même nom que certaines existant
-								dans <b style="color: crimson;">Voiture</b>, elles viennent les cacher (<b style="color: crimson;">surcharge</b>). </li>
-							<li>Pour appeler une méthode de <b style="color: crimson;">Voiture</b> dans <b style="color: crimson;">VoitureElectrique</b> il faut la préfixer par <b style="color: crimson;">super</b>.</li>
+							<li>Si des méthodes de la classe <b style="color: crimson;">TextFile</b> (obtenue par héritage de <b style="color: crimson;">DesktopItem</b>) ont le même nom que certaines existant
+								dans <b style="color: crimson;">DesktopItem</b>, elles viennent les cacher (<b style="color: crimson;">surcharge</b>). </li>
+							<li>Pour appeler une méthode de <b style="color: crimson;">DesktopItem</b> dans <b style="color: crimson;">TextFile</b> il faut la préfixer par <b style="color: crimson;">super</b>.</li>
 						</ul>
+						<!--
 						<span style="font-size: 18px;">
 							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
 								package monpkg;
@@ -224,6 +324,7 @@
 								}
 						</code></pre>
 						</span>	
+						-->
 						<ul style="font-size: 18px;">
 							<li>Une classe qui hérite d'une autre est une sous-classe et celle dont elle hérite est une super-classe.</li>
 							<li>Une classe peut avoir plusieurs sous-classes.</li>
@@ -231,44 +332,252 @@
 						</ul>
 					</section>
 					<section>
+						<h4>Héritage : Exemple de classe abstracte</h4>
+						<table>
+							<tr>
+								<td>
+									<img src="img/uml_Abstract_DesktopItem_TextFile_classes.png"/>
+								</td>
+								<td style="vertical-align: top;width: 40%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public abstract class DesktopItem {
+				
+												String name;
+										
+												public DesktopItme(name : String) {
+													this.name = name;
+												}
+			
+												public String getName() {
+													return this.name;
+												}
+			
+												public void rename(String name) {
+													this.name = name;
+												}
+
+												public abstract int size();
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 40%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class TextFile extends DesktopItem {
+				
+												String content
+										
+												public TextFile(name : String) {
+													this.name = name;
+												}
+			
+												public void addContent(content : String) {
+													this.content = this.content + content;
+												}
+			
+												public void open() {
+													//TODO : ouvrir le fichier
+												}
+			
+												public String replace(content : String) {
+													return this.content = content
+												}
+			
+												@override
+												public int size() {
+													return this.content.length();
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>						
+					</section>					
+					<section>
 						<h2>Interface</h2>
 
 						<span style="font-size: 20px;">
 							<ul>
 							<li>Une interface est une classe abstraite sans données qui ne peut servir qu’à être adjointe à d’autres classes.</li>
-							<li>Les interfaces permettent de mettre en oeuvre un mécanisme de remplacement.</li>
+							<li>Pour définir une classe qui possède une interface on utilise le mot clé <b style="color: crimson;">implements</b> au lieu du mot clé extends</li>
+							<table>
+								<tr>
+									<td>
+										<img src="img/uml_Interface_Item_Abstract_DesktopItem_TextFile_classes.png"/>
+									</td>
+									<td style="vertical-align: top;width: 40%;"  >
+										<span style="font-size: 18px;">
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												public interface Item {
+					
+													String getName(); 
+
+													int size();
+												}
+											</code></pre>											
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												public abstract class DesktopItem {
+					
+													String name;
+											
+													public DesktopItme(name : String) {
+														this.name = name;
+													}
+				
+													public String getName() {
+														return this.name;
+													}
+				
+													public void rename(String name) {
+														this.name = name;
+													}
+	
+													public abstract int size();
+												}
+											</code></pre>
+										</span>	
+									</td>
+									<td style="vertical-align: top;width: 40%;"  >
+										<span style="font-size: 18px;">
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												public class TextFile extends DesktopItem {
+					
+													String content
+											
+													public TextFile(name : String) {
+														this.name = name;
+													}
+				
+													public void addContent(content : String) {
+														this.content = this.content + content;
+													}
+				
+													public void open() {
+														//TODO : ouvrir le fichier
+													}
+				
+													public String replace(content : String) {
+														return this.content = content
+													}
+				
+													@override
+													public int size() {
+														return this.content.length();
+													}
+												}
+											</code></pre>
+										</span>	
+									</td>
+								</tr>
+							</table>
 							<li>Tous les objets qui se conforment à cette interface (qui implémentent cette interface) possèdent les méthodes et les constantes déclarées dans celle-ci.</li> 
-							
 							<li>Plusieurs interfaces peuvent être implémentées dans une même classe.</li>
 							
-							<li>Les interfaces se déclarent avec le mot clé interface et sont intégrées aux autres classes avec le mot clé implements. Une interface est implicitement déclarée avec le modificateur abstract.</li>
 							</ul>
 						</span>
-					</section>										
+					</section>	
 					<section>
-						<h2>Polymorphisme</h2>
+						<h2>Instanciation</h2>
 						<span style="font-size: 20px;">
 							<ul>
-							<li>Un objet de classe B dérivée de A peut être utilisé partout où un objet de A peut l’être. Si une méthode de A a été	redéfinie dans B on utilisera celle de B.</li>
-							<li>A quoi sert le polymorphisme ?
-								Si on définit une classe L qui est une liste d’objets de classe A, on pourra mettre dans cette liste des objets de
-								n’importe quelle classe à partir du moment où elle est hérité de A.	</li>
+							<li>Lorsque un objet est créé (par utilisation de <b style="color: crimson;">new</b>), le constructeur est appelé et doit recevoir ses paramètres (s’il
+								en a).</li>
 					
 							</ul>
 						</span>						
 						
-					</section>
+					</section>															
+					<section>
+						<h2>Polymorphisme</h2>
+						<span style="font-size: 20px;">
+							<ul>
+							<li>Le polymorphisme est la faculté attribuée à un objet d’être une instance de plusieurs classes.</li>
+							<li>A quoi sert le polymorphisme ?
+								Si on définit une classe L qui est une liste d’objets de classe A, on pourra mettre dans cette liste des objets de
+								n’importe quelle classe à partir du moment où elle est hérité de A.	</li>
+							</ul>
+							<table>
+								<tr>
+									<td>
+										<img src="img/uml_Interface_Item_Abstract_DesktopItem_TextFile_ImageFile_classes.png"/>
+									</td>
+									<td style="vertical-align: top;width: 40%;"  >
+										<span style="font-size: 18px;">
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												public interface Item {
+					
+													String getName(); 
+
+													int size();
+												}
+											</code></pre>											
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												public abstract class DesktopItem {
+					
+													String name;
+											
+													public DesktopItme(name : String) {
+														this.name = name;
+													}
+				
+													public String getName() {
+														return this.name;
+													}
+				
+													public void rename(String name) {
+														this.name = name;
+													}
+	
+													public abstract int size();
+												}
+											</code></pre>
+										</span>	
+									</td>
+									<td style="vertical-align: top;width: 40%;"  >
+										<span style="font-size: 18px;">
+											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+												public class TextFile extends DesktopItem {
+					
+													String content
+											
+													public TextFile(name : String) {
+														this.name = name;
+													}
+				
+													public void addContent(content : String) {
+														this.content = this.content + content;
+													}
+				
+													public void open() {
+														//TODO : ouvrir le fichier
+													}
+				
+													public String replace(content : String) {
+														return this.content = content
+													}
+				
+													@override
+													public int size() {
+														return this.content.length();
+													}
+												}
+											</code></pre>
+										</span>	
+									</td>
+								</tr>
+							</table>							
+					</section>				
 				</section>				
 				<section>
 					<h2> notions ... pas de trop de base ...</h2>
 					<ul>
-						<li>Generics</li>
-						<li>Expressions lambda</li>
-						<li>Stream (flux)</li>
+						<li>Generics (java 5)</li>
+						<li>Expressions lambda (java 8)</li>
+						<li>Stream (java 8)</li>
 					</ul>					
-				</section>
-				<section>
-					<h2></h2>
 				</section>
 			</div>
 
