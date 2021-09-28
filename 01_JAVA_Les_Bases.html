@@ -895,47 +895,235 @@
 									<span style="font-size: 18px;">
 										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
 											// Instanciation
-											ArrayList&lt;String&gt; listOfString =  new ArrayList&lt;String&gt;() ;
+											ArrayList&lt;String&gt; listOfString =  new ArrayList&lt;String&gt;();
+
+											// Utilisation
+											listOfString.add("foo");
 										</code></pre>
 									</span>	
 						</span>
 					</section>
 					<section>
 						<h4>Generics : Exemples</h4>
+						<table>
+							<tr>
+								<td style="vertical-align: top;width: 45%;">
+									<span style="font-size: 18px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class KeyValue&lt;K , V&gt; {
 
-						<span style="font-size: 18px;">									
-							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-								//public interface List&lt;E&gt; extends Collection&lt;E&gt; {
-								//	boolean add(E e);
-								//}
-								
-								public static void main(String args[]) {
-									List&lt;Integer&gt; integers = new ArrayList&lt;&gt;();
-									integers.add(1); // OK
-									integers.add("string"); // erreur de compilation, le type String n'est pas autorisé
-								}
-							</code></pre>
+												private K key;
+												private V value;
+											 
+												public KeyValue(K key, V value) {
+													this.key = key;
+													this.value = value;
+												}
+											 
+												public K getKey() {
+													return key;
+												}
+											 
+												public void setKey(K key) {
+													this.key = key;
+												}
+											 
+												public V getValue() {
+													return value;
+												}
+											 
+												public void setValue(V value) {
+													this.value = value;
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 80%;">
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class KeyValueDemo {
+
+												public static void main(String[] args) {
+											
+													KeyValue&lt;Integer , String&gt; entry = 
+													       new KeyValue&lt;Integer , String&gt;(12000111, "Tom");
+											
+													Integer phone = entry.getKey();
+
+													String name = entry.getValue();
+											
+													System.out.println("Phone = " + phone +
+													                 " / name = " + name);
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>
 						</span>	
 					</section>
 				</section>
 				<section>
-					<h2>Expressions lambda (java 8)</h2>
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
+					<section>
+						<h2>Expressions lambda (java 8)</h2>
+						<span style="font-size: 20px;">
+							<ul> 
+								<li>Une expression lambda est une fonction qui sera créée, c’est-à-dire déclarée et définie, à l’endroit même où elle doit être utilisée.</li>
+								<li>Aucun besoin pour définir une expression lambda en Java de créer une classe, comme on doit le faire lorsqu’une méthode est nécessaire. </li>
+								<li>C’est donc bien la première fois qu’en Java, une fonction peut être amenée sans lui créer une classe.</li>
+								<li>La syntaxe d'une expression lambda est composée de trois parties :</li>
+								<ul>
+									<li>un ensemble de paramètres, d'aucun à plusieurs</li>
+									<li>l'opérateur -&gt;</li>
+									<li>le corps de la fonction</li>
+								</ul>
+								<span style="font-size: 18px;">
+									<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+										(paramètres) -&gt; expression;
+
+										(paramètres) -&gt; { traitements; }
+									</code></pre>
+								</span>
+							</ul>
+						</span>
+					</section>
+					<section>
+						<h4>Expressions lambda : exemples </h4>
+							<span style="font-size: 18px;">									
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									// Comme paramètre d'une fonction
+									public class Main {
+										public static void main(String[] args) {
+										ArrayList&lt;Integer&gt; numbers = 
+											new ArrayList&lt;Integer&gt;();
+										numbers.add(5); numbers.add(9); numbers.add(8);	numbers.add(1);
+										numbers.forEach( (n) -&gt; { System.out.println(n); }); 
+										}
+									}
+									// Output :
+									5
+									9
+									8
+									1
+								</code></pre>
+							</span>
+							<span style="font-size: 18px;">									
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									// Utilisation de Consomer pour stocker l'expression dans une variable
+									import java.util.ArrayList;
+									import java.util.function.Consumer;
+									
+									public class Main {
+									  public static void main(String[] args) {
+										ArrayList&lt;Integer&gt; numbers = new ArrayList&lt;Integer&gt;();
+										numbers.add(5); numbers.add(9); numbers.add(8);	numbers.add(1);
+										Consumer&lt;Integer&gt; method = (n) -> { System.out.println("Nb : " +n); };
+										numbers.forEach( method );
+									  }
+									}
+									// Output :
+									Nb : 5
+									Nb : 9
+									Nb : 8
+									Nb : 1
+								</code></pre>
+							</span>
+							<span style="font-size: 18px;">									
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									// Interface fonctionnelle
+									interface StringFunction {
+										String run(String str);
+									}
+									  
+									public class Main {
+										public static void main(String[] args) {
+										  StringFunction exclaim = (s) -> s + "!";
+										  StringFunction ask = (s) -> s + "?";
+										  printFormatted("Hello", exclaim);
+										  printFormatted("Hello", ask);
+										}
+										public static void printFormatted(String str, StringFunction format) {
+										  String result = format.run(str);
+										  System.out.println(result);
+										}
+									}
+								</code></pre>
+							</span>
+					</section>
 				</section>
 				<section>
-					<h2>Stream (java 8)</h2>
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
-				</section>					
+					<section>
+						<h2>Streams (java 8)</h2>
+						<span style="font-size: 20px;">
+							<ul> 
+								<li>Permettent d’effectuer des traitements sur des collections d’une manière simple et performante.</li>
+								<li>Ils sont souvent utilisés avec les expression lamnda.</li>
+								<li>Un stream prend une collection, un tableau ou des E/S.</li>
+								<li>ils ne modifient pas la structure de données d’origine.</li>
+								<li>Chaque opération intermédiaire est exécutée et renvoie un stream en conséquence, de sorte que diverses opérations intermédiaires peuvent être enchaînées. Les opérations terminales marquent la fin du flux(stream) et renvoient le résultat.</li>
+								<span style="font-size: 18px;">
+									<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+										import java.util.*; 
+										public class StreamExemple
+										{
+											public static void main(String[] args)
+											{  
+												List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5); 
+												list.stream().map(x -> x + 1).forEach(System.out::println);
+											}
+										}
+									</code></pre>
+								</span>
+							</ul>
+						</span>
+					</section>
+					<section>
+						<h4>Stream : exemples </h4>
+							<span style="font-size: 18px;">									
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									// Filter
+									import java.util.Arrays;
+									import java.util.List;
+									import java.util.stream.Collectors;
+									
+									public class FilterPlanets {
+									
+										public static void main(String[] args) {
+									
+											List&lt;String&gt; lines = Arrays.asList("Jupiter", "Terre", "Mars");
+									
+											List&lt;String&gt; result = lines.stream()                
+													.filter(line -> !"Terre".equals(line))
+													.collect(Collectors.toList());              
+											result.forEach(System.out::println);                
+										}
+									}
+								</code></pre>
+							</span>
+							<span style="font-size: 18px;">									
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									// FindAny
+									import java.util.Arrays;
+									import java.util.List;
+									
+									public class FilterAndFindAny {
+									
+										public static void main(String[] args) {
+									
+											List&lt;Integer&gt; list = Arrays.asList(1, 2, 3, 4, 5);
+											Integer result = list
+												  .stream()
+												  .filter(num -> num &lt; 4).findAny(.orElse(null));
+										}
+									}
+									
+								</code></pre>
+							</span>
+					</section>
+				</section>		
 			</div>
-
 		</div>
 
 		<script src="dist/reveal.js"></script>
