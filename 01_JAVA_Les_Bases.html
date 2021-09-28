@@ -34,6 +34,9 @@
                     <p>
 						<small>Gustavo BOBEFF</small>
 					</p>
+                    <p>
+						<small>2021 - 2022</small>
+					</p>
                     <img src="img/logo_cnam_na.png">
 				</section>
 
@@ -474,8 +477,7 @@
 								</tr>
 							</table>
 							<li>Tous les objets qui se conforment à cette interface (qui implémentent cette interface) possèdent les méthodes et les constantes déclarées dans celle-ci.</li> 
-							<li>Plusieurs interfaces peuvent être implémentées dans une même classe.</li>
-							
+							<li>Plusieurs interfaces peuvent être implémentées dans une même classe.</li>							
 							</ul>
 						</span>
 					</section>	
@@ -485,10 +487,18 @@
 							<ul>
 							<li>Lorsque un objet est créé (par utilisation de <b style="color: crimson;">new</b>), le constructeur est appelé et doit recevoir ses paramètres (s’il
 								en a).</li>
-					
+							<li>Une application comporte une classe contenant une méthode <b style="color: crimson;">main</b> déclarée comme suit:</li>
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+								class AClasse {
+									public static void main(String[] args) {
+										System.out.println("Salut à tous!!!");        
+									}
+								}
+								</code></pre>
+							</span>	
 							</ul>
-						</span>						
-						
+						</span>
 					</section>															
 					<section>
 						<h2>Polymorphisme</h2>
@@ -502,67 +512,22 @@
 							<table>
 								<tr>
 									<td>
-										<img src="img/uml_Interface_Item_Abstract_DesktopItem_TextFile_ImageFile_classes.png"/>
+										<img src="img/uml_Interface_Item_Abstract_DesktopItem_TextFile_ImageFile_classes.png" width="80%" height="80%"/>
 									</td>
 									<td style="vertical-align: top;width: 40%;"  >
 										<span style="font-size: 18px;">
 											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-												public interface Item {
-					
-													String getName(); 
+												Item[] items = new Item[4];
+												items[0] = new TextFile("textfile1.txt");
+												items[1] = new ImageFile("image1.png");
+												items[2] = new TextFile("textfile2.txt");
+												items[3] = new ImageFile("image2.png");
 
-													int size();
-												}
-											</code></pre>											
-											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-												public abstract class DesktopItem {
-					
-													String name;
-											
-													public DesktopItme(name : String) {
-														this.name = name;
-													}
-				
-													public String getName() {
-														return this.name;
-													}
-				
-													public void rename(String name) {
-														this.name = name;
-													}
-	
-													public abstract int size();
-												}
-											</code></pre>
-										</span>	
-									</td>
-									<td style="vertical-align: top;width: 40%;"  >
-										<span style="font-size: 18px;">
-											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-												public class TextFile extends DesktopItem {
-					
-													String content
-											
-													public TextFile(name : String) {
-														this.name = name;
-													}
-				
-													public void addContent(content : String) {
-														this.content = this.content + content;
-													}
-				
-													public void open() {
-														//TODO : ouvrir le fichier
-													}
-				
-													public String replace(content : String) {
-														return this.content = content
-													}
-				
-													@override
-													public int size() {
-														return this.content.length();
-													}
+												for (int i = 0 ; i &lt; items.length ; i++) {
+													if (items[i] instanceof TextFile)
+													System.out.println(”element ” + i + ” est un fichier de text”);
+													if (tableau[i] instanceof ImageFile)
+													System.out.println(”element ” + i + ” est une image);
 												}
 											</code></pre>
 										</span>	
@@ -570,15 +535,405 @@
 								</tr>
 							</table>							
 					</section>				
-				</section>				
+				</section>
+				<section>
+					<h2> ... les bases ... encore</h2>
+					<ul>
+						<li>Boucles</li>
+						<li>Structures de contrôle</li>
+						<li>Collections</li>
+						<li>Exceptions</li>
+						<li>...</li>
+					</ul>
+				</section>
+				<section>
+					<h2> Boucles</h2>
+					<span style="font-size: 18px;">
+					<ul>
+					<li>Permettent d’exécuter plusieurs fois un bloc d’instructions, et ce,
+						jusqu’à ce qu’une condition donnée soit fausse. Les trois types d’instruction itératives sont les
+						suivantes :</li>
+					<ul>
+						<li>For</li>
+						<span style="font-size: 18px;">
+							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+								//for (compteur; condition; modification du compteur) {
+								//	liste d'instructions
+								//}
+								int i;
+								for (i=1; i &lt; 6; i++) {
+									System.out.println(i);
+								}
+							</code></pre>
+						</span>
+						<li> While</li>
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									//while (condition réalisée) {
+									//	liste d'instructions
+									//}
+									int i=0;
+									while (i &lt; 6) {
+										i++;
+										System.out.println(i);
+									}
+								</code></pre>
+							</span>
+						<li>Do While</li>
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									//do {
+									//	liste d'instructions
+									//}
+									//while (condition réalisée)
+									int i=0;
+									do
+									{
+										i++;
+										System.out.println(i);
+									}
+									while(i &lt; 6);
+								</code></pre>
+							</span>
+					</ul>
+					</ul>
+					</span>
+				</section>
+				<section>
+					<h2>Strucutures de contrôle</h2>
+					<span style="font-size: 18px;">
+					<ul>
+					<li>Elles permetent d'exécuter une série d'instructions lorsqu'une condition est réalisée :</li>
+						<ul>
+							<li>if else </li>
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									//if (condition réalisée) {
+									//		liste d'instructions si la condition est réalisée
+									//	}
+									//	else {
+									//		liste d'instructions si la condition n'est pas réalisée
+									//	}
+									if (a &lt; b)
+										min=a;
+									else
+										min=b;
+
+									// Affectation conditionnelle (opérateur ternaire)	
+									min = a &lt; b ? a : b;
+								</code></pre>
+							</span>
+							<li> Switch</li>
+								<table>
+									<tr>
+										<td style="vertical-align: top;width: 40%;"  >
+											<span style="font-size: 18px;">									
+												<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+													switch (variable) {
+														case valeur1 :
+														Liste d'instructions
+														break;
+														case valeur2 :
+														Liste d'instructions
+														break;
+														case valeurN... :
+														Liste d'instructions
+														break;
+														default: 
+														Liste d'instructions
+													}
+												</code></pre>
+											</span>	
+										</td>
+										<td style="vertical-align: top;width: 40%;"  >
+											<span style="font-size: 18px;">
+												<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+													int number = 44;
+													String size;
+
+													switch (number) {											
+													case 29:
+														size = "Small";
+														break;
+													case 42:
+														size = "Medium";
+														break;
+													case 44:
+														size = "Large";
+														break;
+													case 48:
+														size = "Extra Large";
+														break;
+													default:
+														size = "Unknown";
+														break;
+													}
+													System.out.println("Size: " + size);
+												}
+												</code></pre>
+											</span>	
+										</td>
+									</tr>
+								</table>
+						</ul>
+					</ul>
+					</span>
+				</section>
+				<section>
+					<section>
+						<h2>Collections</h2>
+						<span style="font-size: 18px;">
+							<ul>
+								<li>Les collections en Java sont des classes permettant de manipuler les structures de données usuelles : listes, piles, files (ou queues).</li>
+							</ul>
+							<img src="img/java-collection-hierarchy.png" width="50%" height="50%" >
+					</section>
+					<section>
+						<h4>Collections : exemples</h4>
+						<table>
+							<tr>
+								<td style="vertical-align: top;width: 50%;"  >
+									<span style="font-size: 18px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											import java.util.LinkedList;
+											import java.util.List;
+
+											public class ExempleLinkedList {
+											
+												public static void main(String[] args) {
+													// Créer un objet List.
+													List list = new LinkedList();
+											
+													// Ajouter quelques éléments à la liste
+													list.add("Mercure");
+													list.add("Vénus");
+													list.add("Terre");
+													list.add("Mars");
+													list.add("Jupiter");
+											
+													// Ajouter l'élément à la fin de la liste
+													list.addLast("Saturne");
+											
+													// Ajouter l'élément à la première position de la liste.
+													list.addFirst("Uranus");
+											
+													// Insérer l'élément spécifié en position avec l'index 1.
+													list.add(1, "Pluton");
+											
+													// Écrire tous les éléments de la liste:
+													System.out.println("Contenu original: " + list);
+											
+													// Supprimer un élément de la liste
+													list.remove("Mercure");
+											
+													// Supprimer l'élément en position avec index 2
+													list.remove(2);
+											
+													// Imprimer la liste après que vous avez supprimé 2 éléments.
+													System.out.println("Liste arpès suppression: " + list);
+											
+													// Supprimer le premier  et le dernier élément  dans la liste.
+													list.removeFirst();
+													list.removeLast();
+											
+													// Imprimer la liste après qu'elle a été supprimée.
+													System.out.println("Arpès suppression first et last: " + list);
+												}
+											
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 50%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											Contenu original: [Uranus, Pluton, Mercure, Vénus, Terre, Mars, Jupiter, Saturne]
+											Liste après suppression: [Uranus, Pluton, Terre, Mars, Jupiter, Saturne]
+											Après suppression first et last: [Pluton, Terre, Mars, Jupiter]
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Exceptions</h2>
+
+						<span style="font-size: 18px;">
+							<ul>
+								<li>Java utilise des exceptions pour traiter les événements pouvant survenir lors de certaines opérations. </li>
+								<li>Lorsque l’on utilise de telles opérations il est impératif de prendre en compte la récupération et le traitement des éventuelles exceptions.</li>
+								<li>Capture et traitement d’une exception : 
+								Toute opération susceptible de lever une exception doit être placée dans un bloc <b style="color: crimson;">try</b>, le traitement de l’exception
+								fait l’objet d’un bloc <b style="color: crimson;">catch</b> :</li>
+								<span style="font-size: 18px;">
+									<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+										try {
+											// Bloc d'instructions pouvant déclencher une erreur
+										} catch ( Exception exception ) {
+											// Bloc d'instructions pour traiter une éventuelle exception
+										} finally {
+											// Bloc d'instructions à exécuter dans tous les cas, 
+											// que le try se soit exécuté en succès ou en erreur.
+										}
+									</code></pre>
+								</span>
+								<li> Déclenchement d’une exception : une méthode qui doit lever une exception doit être définie comme suit :</li>
+								<span style="font-size: 18px;">
+									<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+										typeDeRetour nomDeMethode (liste de paramètres) throws ClasseException
+										{ // dans le corps de cette méthode on trouvera :
+											throw(nomException); // nomException est de classe ClasseException
+										}
+									</code></pre>
+								</span>
+							</ul>
+						</span>
+					</section>
+					<section>
+						<h4>Exceptions : Exemples</h4>
+						<table>
+							<tr>
+								<td style="vertical-align: top;width: 70%;"  >
+									<span style="font-size: 18px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class ExempleDivisionParZero {
+    
+												public static void main( String [] args ) {
+													
+													try {
+														int randomValue = (int) (Math.random() * 3);
+														// Attention : cele peut produire une erreur si / par 0
+														int res = 1 / randomValue;      
+														System.out.println( "Résultat == " + res );
+													} finally {
+														System.out.println( "Terminé !" );
+													}
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 70%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											Exception in thread "main" java.lang.ArithmeticException: / by zero
+												at ExempleDivisionParZero.main(ExempleDivisionParZero.java:8)
+											Terminé !
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td style="vertical-align: top;width: 70%;"  >
+									<span style="font-size: 18px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											public class ExempleDivisionParZero {
+
+												public static void main( String [] args ) {
+											
+													try {
+														int randomValue = 0; //(int) (Math.random() * 3);
+														// Attention : cele peut produire une erreur si / par 0
+														int res = 1 / randomValue;
+														System.out.println( "Résultat == " + res );
+													} catch (Exception e) {
+														System.out.println( "Attention, une exception : " + e.toString());
+													} finally {
+														System.out.println( "Terminé !" );
+													}
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 70%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											Attention, une exception : java.lang.ArithmeticException: / by zero
+											Terminé !
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>
+					</section>
+				</section>
 				<section>
 					<h2> notions ... pas de trop de base ...</h2>
 					<ul>
 						<li>Generics (java 5)</li>
 						<li>Expressions lambda (java 8)</li>
 						<li>Stream (java 8)</li>
-					</ul>					
+					</ul>
 				</section>
+				<section>
+					<section>
+						<h2>Generics (java 5)</h2>
+						<span style="font-size: 20px;">
+							<ul>
+								<li>Les méthodes et classes génériques Java permettent aux programmeurs de spécifier, avec une seule déclaration de méthode ou avec une seule déclaration de classe, un ensemble de types associés.</li>
+								<li>Les génériques offrent également une type safety au moment de la compilation qui permet aux programmeurs de détecter les types non valides.</li>
+							</ul>
+
+									<span style="font-size: 18px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											// Définition
+										public  class ArrayList&lt;T&gt; {
+
+											public T get() { ... }
+										   
+											public  void add(T t) { ... }
+										}
+										</code></pre>
+									</span>	
+
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											// Instanciation
+											ArrayList&lt;String&gt; listOfString =  new ArrayList&lt;String&gt;() ;
+										</code></pre>
+									</span>	
+						</span>
+					</section>
+					<section>
+						<h4>Generics : Exemples</h4>
+
+						<span style="font-size: 18px;">									
+							<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+								//public interface List&lt;E&gt; extends Collection&lt;E&gt; {
+								//	boolean add(E e);
+								//}
+								
+								public static void main(String args[]) {
+									List&lt;Integer&gt; integers = new ArrayList&lt;&gt;();
+									integers.add(1); // OK
+									integers.add("string"); // erreur de compilation, le type String n'est pas autorisé
+								}
+							</code></pre>
+						</span>	
+					</section>
+				</section>
+				<section>
+					<h2>Expressions lambda (java 8)</h2>
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</section>
+				<section>
+					<h2>Stream (java 8)</h2>
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</section>					
 			</div>
 
 		</div>
