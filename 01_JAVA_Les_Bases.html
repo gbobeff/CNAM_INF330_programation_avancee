@@ -232,11 +232,11 @@
 												String content
 												String name;
 										
-												public TextFile(name : String) {
+												public TextFile(String name) {
 													this.name = name;
 												}
 			
-												public void addContent(content : String) {
+												public void addContent(String content) {
 													this.content = this.content + content;
 												}
 			
@@ -244,7 +244,7 @@
 													//TODO : ouvrir le fichier
 												}
 			
-												public String replace(content : String) {
+												public String replace(String content) {
 													return this.content = content
 												}
 			
@@ -277,7 +277,7 @@
 				
 												String name;
 										
-												public DesktopItme(name : String) {
+												public DesktopItme(String name) {
 													this.name = name;
 												}
 			
@@ -299,11 +299,11 @@
 				
 												String content
 										
-												public TextFile(name : String) {
+												public TextFile(String name) {
 													this.name = name;
 												}
 			
-												public void addContent(content : String) {
+												public void addContent(String content) {
 													this.content = this.content + content;
 												}
 			
@@ -311,7 +311,7 @@
 													//TODO : ouvrir le fichier
 												}
 			
-												public String replace(content : String) {
+												public String replace(String content) {
 													return this.content = content
 												}
 			
@@ -384,7 +384,7 @@
 				
 												String name;
 										
-												public DesktopItme(name : String) {
+												public DesktopItme(String name) {
 													this.name = name;
 												}
 			
@@ -408,11 +408,11 @@
 				
 												String content
 										
-												public TextFile(name : String) {
+												public TextFile(String name) {
 													this.name = name;
 												}
 			
-												public void addContent(content : String) {
+												public void addContent(String name) {
 													this.content = this.content + content;
 												}
 			
@@ -420,7 +420,7 @@
 													//TODO : ouvrir le fichier
 												}
 			
-												public String replace(content : String) {
+												public String replace(String name) {
 													return this.content = content
 												}
 			
@@ -458,11 +458,12 @@
 												}
 											</code></pre>											
 											<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-												public abstract class DesktopItem {
+												public abstract class DesktopItem 
+												         implements Item {
 					
 													String name;
 											
-													public DesktopItme(name : String) {
+													public DesktopItme(String name) {
 														this.name = name;
 													}
 				
@@ -486,11 +487,11 @@
 					
 													String content
 											
-													public TextFile(name : String) {
+													public TextFile(String name) {
 														this.name = name;
 													}
 				
-													public void addContent(content : String) {
+													public void addContent(String content) {
 														this.content = this.content + content;
 													}
 				
@@ -498,7 +499,7 @@
 														//TODO : ouvrir le fichier
 													}
 				
-													public String replace(content : String) {
+													public String replace(String content) {
 														return this.content = content
 													}
 				
@@ -528,7 +529,11 @@
 								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
 								class AClasse {
 									public static void main(String[] args) {
-										System.out.println("Salut à tous!!!");        
+										System.out.println("Salut à tous!!!");
+										TextFile aTextFile = new TextFile("aTexTfile");
+
+										System.out.println(aTextFile.size(); );
+										    
 									}
 								}
 								</code></pre>
