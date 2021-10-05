@@ -181,14 +181,98 @@
 								<li><b style="color: crimson;">java.io</b> pour Java</li>
 							</ul>
 							<li>La sérialisation est utilisée principalement pour sauvegarder l’état d’objets localement ou pour transférer des objets entre programmes.</li>
+							<li>En Java, pour être sérialisable, un objet doit implémenter l’interface <b style="color: crimson;">Serializable</b>.</li>
 						</ul>
 						<ul style="font-size: 20px;">
 							<li>La <b style="color: crimson;">désérialisation</b> est l’étape opposée à la sérialisation c’est-à-dire que des objets sont créés à partir d’un tableau d’octets.</li>
 						</ul>
 					</section>
 					<section>
-						<h4>Exemple : Sérialisation et désérialisation</h4>
-					</section>
+						<h4>Exemple : Sérialisation</h4>
+						<table>
+							<tr>
+								<td style="vertical-align: top;width: 80%;"  >
+									<span style="font-size: 16px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											import java.io.*;
+											
+											public class TestSerialisation implements Serializable {
+											
+												String aString;
+											
+												public TestSerialisation(String aString) {
+													this.aString = aString;
+												}
+											
+												public static void main(String[] args) throws Throwable {
+											
+													TestSerialisation ts = new TestSerialisation("TestSerlisation");
+													FileOutputStream fos = new FileOutputStream(
+														new File("/tmp/TestSerialisation.ser"));
+											
+													ObjectOutputStream oos = new ObjectOutputStream(fos);
+													oos.writeObject(ts);
+											
+													oos.close();
+													fos.close();
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 70%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											$ hexdump -C /tmp/TestSerialisation.ser
+											00000000  ac ed 00 05 73 72 00 11  54 65 73 74 53 65 72 69  |....sr..TestSeri|
+											00000010  61 6c 69 73 61 74 69 6f  6e 1f 7e 4a 41 a0 3c fe  |alisation.~JA.<.|
+											00000020  73 02 00 01 4c 00 07 61  53 74 72 69 6e 67 74 00  |s...L..aStringt.|
+											00000030  12 4c 6a 61 76 61 2f 6c  61 6e 67 2f 53 74 72 69  |.Ljava/lang/Stri|
+											00000040  6e 67 3b 78 70 74 00 0f  54 65 73 74 53 65 72 6c  |ng;xpt..TestSerl|
+											00000050  69 73 61 74 69 6f 6e                              |isation|
+											00000057
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>						
+					</section>	
+					<section>
+						<h4>Exemple : Désérialisation</h4>
+						<table>
+							<tr>
+								<td style="vertical-align: top;width: 70%;"  >
+									<span style="font-size: 16px;">									
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											import java.io.*;
+											
+											public class TestDeserealisation {
+											
+												public static void main(String[] args) throws Throwable {
+											
+													FileInputStream fis = new FileInputStream(
+														new File("/tmp/TestSerialisation.ser"));
+											
+													ObjectInputStream ois = new ObjectInputStream(fis);
+											
+													TestSerialisation ts = (TestSerialisation) ois.readObject();
+											
+													System.out.println("mc.aString = " + ts.aString);
+												}
+											}
+										</code></pre>
+									</span>	
+								</td>
+								<td style="vertical-align: top;width: 60%;"  >
+									<span style="font-size: 18px;">
+										<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+											mc.aString = TestSerlisation
+										</code></pre>
+									</span>	
+								</td>
+							</tr>
+						</table>						
+					</section>				
 				</section>	
 			</div>
 		</div>
