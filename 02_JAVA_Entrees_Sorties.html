@@ -56,8 +56,9 @@
 					<li><b style="color: crimson;">Character Streams</b> lecture/écriture des chaînes de caractères</li>
 					<li><b style="color: crimson;">Buffered Streams</b> lecture/écriture optimisée pour réduire le
 						nombre d'appels à l'API.</li>
-					<li><b style="color: crimson;">Scanning and Formatting</b> lecture/écriture de text formaté.</li>
-					<li><b style="color: crimson;">I/O from the Command Line</b> lecture/écriture standard.</li>
+					<li><b style="color: crimson;">Scanning/Formatting</b> lecture/écriture de text formaté.</li>
+					<li><b style="color: crimson;">I/O depuis/vers la ligne de commande</b> lecture/écriture standard.
+					</li>
 					<li><b style="color: crimson;">Data Streams</b> lecture/écriture de données primitive.</li>
 					<li><b style="color: crimson;">Object Streams</b> lecture/écriture d'objects.</li>
 				</ul>
@@ -67,107 +68,202 @@
 				<img src="img/JN3_1101.gif" width="30%" height="30%">
 			</section>
 			<section>
+				<h4>on a le choix ... </h4>
+				<img src="img/Java-Input-Stream.png" width="40%" height="40%">
+				<img src="img/Java-Output-Stream.png" width="40%" height="40%">
+			</section>
+			<section>
 				<h4>Exemple : Entrée/Sortie standard</h4>
 				<table>
 					<tr>
 						<td style="vertical-align: top;width: 70%;">
 							<span style="font-size: 18px;">
 								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-										import java.io.BufferedReader;
-										import java.io.IOException;
-										import java.io.InputStreamReader;
-										
-										public class Clavier {
-											public static void main(String[] args) {
-												try {
-													BufferedReader flux = new BufferedReader(
-															new InputStreamReader(System.in));
-													System.out.print("Entrez votre prenom : ");
-													String prenom = flux.readLine();
-													System.out.println("Bonjour " + prenom);
-													flux.close();
-												} catch (IOException ioe) {
-													System.err.println(ioe);
-												}
+									import java.io.*;
+
+									public class Lecture01Clavier {
+										public static void main(String[] args) {
+											try {
+												// Input
+												Reader in = new InputStreamReader(System.in);
+												// Reader
+												BufferedReader flux = new BufferedReader(in);
+												System.out.print("Entrez votre prenom : ");
+												String prenom = flux.readLine();
+									
+												System.out.println("Bonjour " + prenom);
+												flux.close();
+											} catch (IOException ioe) {
+												System.err.println(ioe);
 											}
 										}
+									}
 									</code></pre>
 							</span>
 						</td>
 					</tr>
 				</table>
+				<h8 style="font-size: 18px;">Architecture : System.in(clavier) => [InputStreamReader] + [BufferedReader]
+					=> System.out(console)</h8>
 			</section>
 			<section>
-				<h4>Exemple : Lecture/Ecriture des fichiers</h4>
+				<h4>Lecture/Ecriture des fichiers</h4>
 				<table>
 					<tr>
 						<td style="vertical-align: top;width: 70%;">
 							<span style="font-size: 18px;">
 								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-										import java.io.*;
-
-										public class LectureFichierText {
-											public static void main(String[] args) {
-												try {
-													FileReader fileReader = new FileReader("data.txt");
-													BufferedReader reader = new BufferedReader(fileReader);
-													while (reader.ready()) {
-														String[] line = reader.readLine().split(" ");
-														for (String s : line) {
-															System.out.print(s);
-														}
-														System.out.println();
-													}
-													reader.close();
-													fileReader.close();
-												} catch (FileNotFoundException e) {
-													e.printStackTrace();
-												} catch (IOException e) {
-													e.printStackTrace();
-												}
-											}
-										}
-									</code></pre>
-							</span>
-						</td>
-					</tr>
-				</table>
-			</section>
-			<section>
-				<h4>Exemple : Lecture avec try-with-resources (Java 9)</h4>
-				<table>
-					<tr>
-						<td style="vertical-align: top;width: 70%;">
-							<span style="font-size: 18px;">
-								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-										import java.io.*;
-
-										public class LectureFichierText {
-											public static void main(String[] args) throws FileNotFoundException {
-												FileReader fileReader = new FileReader("data.txt");
+									import java.io.IOException;
+									import java.nio.file.Paths;
+									
+									public class Lecture02FichierText {
+										public static void main(String[] args) {
+											try {
+												String currentDir = Paths.get("").toAbsolutePath().toString();
+												String textFileName = currentDir + "/resources/data.txt";
+												// Reading text file
+												FileReader fileReader = new FileReader(textFileName);
+												// Buffering text stream
 												BufferedReader reader = new BufferedReader(fileReader);
-												try (reader){
-													while (reader.ready()) {
-														String[] line = reader.readLine().split(" ");
-														for (String s : line) {
-															System.out.print(s);
-														}
-														System.out.println();
+												while (reader.ready()) {
+													String[] line = reader.readLine().split(" ");
+													for (String s : line) {
+														// impression des mots séparés par '|'
+														System.out.print(s + "|");
 													}
-													// reader.close();
-													// fileReader.close();
-												} catch (FileNotFoundException e) {
-													e.printStackTrace();
-												} catch (IOException e) {
-													e.printStackTrace();
+													System.out.println();
 												}
+												reader.close();
+												fileReader.close();
+											} catch (FileNotFoundException e) {
+												e.printStackTrace();
+											} catch (IOException e) {
+												e.printStackTrace();
 											}
 										}
+									}
 									</code></pre>
 							</span>
 						</td>
 					</tr>
 				</table>
+				<h8 style="font-size: 18px;">Architecture : fichier.txt => [FileReader] + [BufferedReader] => System.out
+				</h8>
+			</section>
+			<section>
+				<h4>Lecture avec try-with-resources (Java 9)</h4>
+				<table>
+					<tr>
+						<td style="vertical-align: top;width: 70%;">
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									import java.io.*;
+									import java.nio.file.Paths;
+									
+									public class Lecture03FichierWithClosables {
+										public static void main(String[] args) throws FileNotFoundException {
+											String currentDir = Paths.get("").toAbsolutePath().toString();
+											String textFileName = currentDir + "/resources/data.txt";
+											// Reading text file
+											FileReader fileReader = new FileReader(textFileName);
+											// Buffering text stream
+											BufferedReader reader = new BufferedReader(fileReader);
+											try (reader){
+												while (reader.ready()) {
+													String[] line = reader.readLine().split(" ");
+													for (String s : line) {
+														// impression des mots séparés par '|'
+														System.out.print(s + "|");
+													}
+													System.out.println();
+												}
+												// reader.close();
+												// fileReader.close();
+											} catch (FileNotFoundException e) {
+												e.printStackTrace();
+											} catch (IOException e) {
+												e.printStackTrace();
+											}
+										}
+									}
+									</code></pre>
+							</span>
+						</td>
+					</tr>
+				</table>
+				<h8 style="font-size: 18px;">Architecture : fichier.txt => [FileReader] + [BufferedReader] => System.out
+				</h8>
+				<p style="font-size: 18px;">Fermeture des flux (entrée et/ou sortie) implicite.</p>
+			</section>
+			<section>
+				<h4>Streaming de ressources du package</h4>
+				<table>
+					<tr>
+						<td style="vertical-align: top;width: 70%;">
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									import java.io.*;
+
+									public class Lecture04FichierUsingInputStream {
+										public static void main(String[] args) throws FileNotFoundException {
+											// Streaming d'une ressource du classpath
+											InputStream stream = Lecture04FichierUsingInputStream.class.getResourceAsStream("data.txt");
+											BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+											try (reader){
+												while (reader.ready()) {
+													String[] line = reader.readLine().split(" ");
+													for (String s : line) {
+														// impression des mots séparés par '|'
+														System.out.print(s + "|");
+													}
+													System.out.println();
+												}
+											} catch (FileNotFoundException e) {
+												e.printStackTrace();
+											} catch (IOException e) {
+												e.printStackTrace();
+											}
+										}
+									}
+									</code></pre>
+							</span>
+						</td>
+					</tr>
+				</table>
+				<h8 style="font-size: 18px;">Architecture : fichier.txt => [InputStream] + [InputStreamReader] +
+					[BufferedReader] => System.out
+				</h8>
+				<p style="font-size: 18px;">Streaming d'un fichier ressource embarqué dans un le paquet à déployer.</p>
+			</section>
+			<section>
+				<h4>Utilisation d'un scanner pour le traitement de texte (plus simple)</h4>
+				<table>
+					<tr>
+						<td style="vertical-align: top;width: 70%;">
+							<span style="font-size: 18px;">
+								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									import java.io.*;
+									import java.util.Scanner;
+									
+									public class Lecture05FichierUsingInputStreamWtihScanner {
+										public static void main(String[] args) throws FileNotFoundException {
+											InputStream stream = Lecture05FichierUsingInputStreamWtihScanner.class.getResourceAsStream("data.txt");
+											Scanner scanner = new Scanner(stream);
+											try (scanner){
+												while (scanner.hasNext()) {
+													String s = scanner.next();
+													System.out.println(String.format("s:%s - ",s));
+												}
+											}
+										}
+									}
+									</code></pre>
+							</span>
+						</td>
+					</tr>
+				</table>
+				<h8 style="font-size: 18px;">Architecture : fichier.txt => [InputStream] + [Scanner] => System.out
+				</h8>
 			</section>
 			<section>
 				<section>
@@ -279,6 +375,13 @@
 						</tr>
 					</table>
 				</section>
+			</section>
+			<section>
+				<h4>Liens</h4>
+				<ul>
+					<li><a href="https://github.com/GISMAR-S-A-R-L/CNAM_INF330_PA_TP_02_Exemple">Exemple GIT</a></li>
+					<li><a href="https://classroom.github.com/a/mGqDo08c" target="_blank">TP_02 (GIT Classroom)</a>
+				</ul>
 			</section>
 		</div>
 	</div>
