@@ -45,18 +45,75 @@
 				<p style="font-size: 20px;text-align: left;">
 					"Le développement et déploiement des applications est devenu un vrai casse-tête"
 				</p>
+
 				<div style="font-size: 20px;text-align: left;">
-					<p>les causes?</p>
 					<ul>
-						<li>le nombre de dépendances sur de libraries exteners à gerer</li>
-						<ul>
-							<il>mise à jour des versions</il>
-							<li>gestion des conflits</li>
-							<li>...</li>
-						</ul>
+						<li>les causes?
+							<ul>
+								<ul>
+									<li>le nombre de dépendances sur de librairies externes à gérer
+									  <ul>
+										<li>mise à jour des versions</li>
+										<li>gestion des conflits entre les librairies tiers</li>
+									  </ul>
+									</li>
+									<li>multiplicité d'environnements
+										<ul>
+										  <li>configuration différente</li>
+										  <li>cycle de vie différente</li>
+										</ul>
+									</li>
+							  </ul>
+						</li>
 					</ul>
 				</div>
 			</section>
+			<section>
+				<h4>Solution</h4>
+				<div style="font-size: 20px;text-align: left;">
+					<ul>
+						<li>Deux solutions sur le marché (les plus répandues)
+							<ul>
+								<ul>
+									<li>MAVEN : outil pour la gestion de projets JAVA initialement mais il est aussi possible de l'utiliser sur de projets dans autres langages (Ruby, C#, ...)
+									<!--!
+									  <ul>
+										<li>mise à jour des versions</li>
+										<li>gestion des conflits entre les librairies tiers</li>
+									  </ul>
+									</li>
+									-->
+									<li>GRADEL : "un système d'automatisation de la construction open source", en reprenant les meilleurs concepts d'Ant, Maven, Ivy et Groovy
+										<!-- 
+										<ul>
+										  <li>configuration différente</li>
+										  <li>cycle de vie différente</li>
+										</ul>
+									-->
+									</li>
+							  </ul>
+						</li>
+					</ul>
+					<br>
+					<table border="1">
+						<caption>Maven vs Gradel</caption>
+						<thead>
+							<tr>
+								<th></th>
+								<th>Maven</th>
+								<th>Gradel</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Configuration</td>
+								<td>langage de spécification du domaine (DSL) en langage Groovy pour écrire un "script"</td>
+								<td>fichier XML pour definir la structure du projet</td>
+							</tr>
+						</tbody>
+					</table>					
+				</div>
+			</section>			
 		</div>
 	</div>
 
