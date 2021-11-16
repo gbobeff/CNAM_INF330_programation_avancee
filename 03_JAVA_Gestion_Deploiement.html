@@ -125,25 +125,27 @@
 						<td style="vertical-align: top;width: 70%;">
 							<span style="font-size: 18px;">
 								<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
-									import java.io.*;
-
-									public class Lecture01Clavier {
-										public static void main(String[] args) {
-											try {
-												// Input
-												Reader in = new InputStreamReader(System.in);
-												// Reader
-												BufferedReader flux = new BufferedReader(in);
-												System.out.print("Entrez votre prenom : ");
-												String prenom = flux.readLine();
+									<?xml version="1.0" encoding="UTF-8"?>
+									<project xmlns="http://maven.apache.org/POM/4.0.0"
+									xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+									xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+									 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+										<modelVersion>4.0.0</modelVersion>
 									
-												System.out.println("Bonjour " + prenom);
-												flux.close();
-											} catch (IOException ioe) {
-												System.err.println(ioe);
-											}
-										}
-									}
+										<groupId>fr.cnam.info330</groupId>
+										<artifactId>test_projet_maven</artifactId>
+										<version>1.0-SNAPSHOT</version>
+									
+										<properties>
+											<maven.compiler.source>16</maven.compiler.source>
+											<maven.compiler.target>16</maven.compiler.target>
+										</properties>
+									
+										<dependencies>
+											...
+										</dependencies>
+									
+									</project>
 									</code></pre>
 							</span>
 						</td>
