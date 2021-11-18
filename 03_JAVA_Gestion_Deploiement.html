@@ -75,7 +75,7 @@
 						<li>Deux solutions sur le marché (les plus répandues)
 							<ul>
 								<ul>
-									<li>MAVEN : outil pour la gestion de projets JAVA initialement mais il est aussi possible de l'utiliser sur de projets dans autres langages (Ruby, C#, ...)
+									<li><b style="color: rgb(186, 218, 8);">MAVEN</b> : outil pour la gestion de projets JAVA initialement mais il est aussi possible de l'utiliser sur de projets dans autres langages (Ruby, C#, ...)
 									<!--!
 									  <ul>
 										<li>mise à jour des versions</li>
@@ -83,7 +83,7 @@
 									  </ul>
 									</li>
 									-->
-									<li>GRADEL : "un système d'automatisation de la construction open source", en reprenant les meilleurs concepts d'Ant, Maven, Ivy et Groovy
+									<li><b style="color: rgb(186, 218, 8);">GRADEL</b> : "un système d'automatisation de la construction open source", en reprenant les meilleurs concepts d'Ant, Maven, Ivy et Groovy
 										<!-- 
 										<ul>
 										  <li>configuration différente</li>
@@ -95,6 +95,7 @@
 						</li>
 					</ul>
 					<br>
+					<!--
 					<table border="1">
 						<caption>Maven vs Gradel</caption>
 						<thead>
@@ -110,9 +111,18 @@
 								<td>langage de spécification du domaine (DSL) en langage Groovy pour écrire un "script"</td>
 								<td>fichier XML pour definir la structure du projet</td>
 							</tr>
+							<tr>
+								<td>Performance</td>
+								<td>langage de spécification du domaine (DSL) en langage Groovy pour écrire un "script"</td>
+								<td>fichier XML pour definir la structure du projet</td>
+							</tr>
 						</tbody>
-					</table>					
+					</table>
+					-->
 				</div>
+			</section>
+			<section>
+				<img src="img/maven_logo.png" alt="">
 			</section>
 			<section>
 				<h4>Architecture</h4>
@@ -151,7 +161,56 @@
 						</td>
 					</tr>
 				</table>
-			</section>							
+			</section>
+			<section>
+				<h4>Structure d'un projet</h4>
+				<img src="img/maven_project_structure.png" width="40%" height="40%">
+			</section>
+			<section>
+				<h4>Tâches (goals)</h4>
+				<table border="1" style="font-size: 18px;">
+					<caption></caption>
+					<thead>
+						<tr>
+							<th>Tâche</th>
+							<th>Fonction</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>validate</td>
+							<td>Valider les informations nécessaires à la génération du projet</td>
+						</tr>
+						<tr>
+							<td>compile</td>
+							<td>Compiler le code source du projet</td>
+						</tr>
+						<tr>
+							<td>test</td>
+							<td>Compiler et exécuter les tests unitaires automatisés. Ces tests ne doivent pas avoir besoin de la forme diffusable de l'artéfact ni de son déploiement dans un environnement</td>
+						</tr>
+						<tr>
+							<td>package</td>
+							<td>Générer l'artéfact sous sa forme diffusable (jar, war, ear, ...)</td>
+						</tr>
+						<tr>
+							<td>install</td>
+							<td>Installer l'artéfact dans le dépôt local pour qu'il puisse être utilisé comme dépendance d'autres projets</td>
+						</tr>
+						<tr>
+							<td>deploy</td>
+							<td>Déployer l'artéfact dans un environnement dédié et copier de l'artéfact dans le référentiel distant</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>...</td>
+						</tr>
+					</tbody>
+				</table>
+				<p style="font-size: 20px;text-align: left;">
+					bref ... quelques unes
+				</p>	
+			</section>									
 		</div>
 	</div>
 
