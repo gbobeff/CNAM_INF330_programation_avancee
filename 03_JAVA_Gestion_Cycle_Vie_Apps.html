@@ -53,7 +53,7 @@
 									<li>le nombre de dépendances sur de librairies externes à gérer
 										<ul>
 											<li>mise à jour des versions</li>
-											<li>gestion des conflits entre les librairies tiers</li>
+											<li>gestion des conflits entre les librairies tierces</li>
 										</ul>
 									</li>
 									<li>tests unitaires
@@ -208,6 +208,87 @@
 				<p style="font-size: 20px;text-align: left;">
 					bref ... quelques unes
 				</p>
+			</section>
+			<section>
+				<h4>Problème : Sérialisation / Désérialisation d'un flux JSON</h4>
+				<ul style="font-size: 18px;">
+					<li>C'est quoi "JSON"?
+						<ul>
+							<ul>
+								<li><b style="color: rgb(186, 218, 8);">JSON (JavaScript Objet Notation) </b> : est une
+									représentation sans schéma, en texte clair, de données structurées basées sur des
+									paires nom/valeur et des listes ordonnées.</li>
+								<span style="font-size: 14px;">
+									<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+										{
+											"fruits": [
+											  { "kiwis": 3,
+												"mangues": 4,
+												"pommes": null
+											  },
+											  { "panier": true }
+											],
+											"legumes": {
+												"patates": "amandine",
+												"poireaux": false
+											  },
+											  "viandes": ["poisson","poulet","boeuf"]
+										}
+											</code></pre>
+								</span>
+								<li>{...} : les accolades définissent un objet.</li>
+								<li>"language":"Java" : Les guillemets et les "double-points" définissent
+									un couple clé/valeur (on parle de membre).</li>
+								<li>[...] : Les crochets définissent un tableau.</li>
+								<li>{"id":1, "language":"json", "author":"Douglas Crockford"} : Les virgules permettent
+									de séparer les membres d'un tableau ou, comme ici, d'un objet .</li>
+							</ul>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h4>Solution : Sérialisation / Désérialisation d'un flux JSON</h4>
+				<ul style="font-size: 18px;">
+					<li>On cherche une librairie tierce pour "ser-deser" du flux json</li>
+					<img src="img/recherche_json_lib_google.png" width="50%" height="50%">
+					<li>On cherche les "coordonnées" de la lib "jackson" dans le dépôt central Maven (<a
+							href="https://mvnrepository.com/">https://mvnrepository.com/</a>)</li>
+					<img src="img/coordonees_maven_jackson.png" width="50%" height="50%">
+				</ul>
+			</section>
+			<section>
+				<h4>Solution : Sérialisation / Désérialisation d'un flux JSON</h4>
+				<ul style="font-size: 18px;">
+					<li>On intègre la librairie jackson dans le projet maven (pom.xml)</li>
+					<span style="font-size: 14px;">
+						<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+							&lt;?xml&nbsp;version=&quot;1.0&quot;&nbsp;encoding=&quot;UTF&#45;8&quot;?&gt;
+							&lt;project&nbsp;xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema&#45;instance&quot;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0&nbsp;http://maven.apache.org/xsd/maven&#45;4.0.0.xsd&quot;&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+							
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;org.example&lt;/groupId&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;test_maven_01&lt;/artifactId&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;1.0&#45;SNAPSHOT&lt;/version&gt;
+							
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;properties&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;jackson.databinding.version&gt;2.13.0&lt;/jackson.databinding.version&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;/properties&gt;
+							
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependencies&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;dependency&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;artifactId&gt;jackson&#45;databind&lt;/artifactId&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;version&gt;&sect;{jackson.databinding.version}&lt;/version&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependency&gt;
+							&nbsp;&nbsp;&nbsp;&nbsp;&lt;/dependencies&gt;
+							&lt;/project&gt;
+						</code></pre>
+					</span>
+				</ul>
 			</section>
 		</div>
 	</div>
