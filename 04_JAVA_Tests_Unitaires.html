@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>JAVA - Gestion de dépendances</title>
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/league.css" id="theme">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<div class="slides">
+			<section>
+				<h3>Langage JAVA</h3>
+				<h4>Tests Unitaires</h4>
+
+				<p>
+					<small>Module INF330 - Programmation avancée </small>
+				</p>
+				<p>
+					<small>Gustavo BOBEFF</small>
+				</p>
+				<p>
+					<small>2021 - 2022</small>
+				</p>
+				<img src="img/logo_cnam_na.png">
+			</section>
+			<section>
+				<h4>Problématique</h4>
+				<p style="font-size: 25px;text-align: left; color: rgb(186, 218, 8);">
+					"La réalisation de programmes peut être une tâche complexe, et il n'est pas toujours évident de
+					parvenir rapidement au but que l'on s'est fixé."
+				</p>
+
+				<div style="font-size: 20px;text-align: left;">
+					<ul>
+						<li>deux approches : le développeur programme la pièce de logicielle (boguée) et ...
+							<ul>
+								<li>force brute
+									<ul>
+										<li>il constate que le programme ne fonctionne pas comme il faut sur un cas
+											contexte</li>
+										<li>il va s'aider d'un débuggeur ou de la sortie texte sur la console pour
+											chercher le bug</li>
+										<li>Résultats :
+											<ul>
+												<li>Risque de passer à côté des cas où le programme ne fonctionne pas
+													comme il a
+													été prévu</li>
+												<li>Impossibilité de reproduire les tests suite à une
+													évolution/correction
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>ecriture de tests
+									<ul>
+										<li>il va identifier les contextes d'exécution du programme et surtout le
+											comportement attendu</li>
+										<li>il va programmer de tests par rapport aux contextes indéfiés</li>
+										<li>Résultats :
+											<ul>
+												<li>Réduction de bugs en production si la couverture des tests est
+													acceptable </li>
+												<li>Possibilité de reproduire les tests suite à une évolution/correction
+													du code</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section>
+				<h4>Les tests, la base pour assurer la qualité du logiciel</h4>
+				<p style="font-size: 25px;text-align: left; color: rgb(186, 218, 8);">
+					" ... je teste, tu testes, il teste ... "
+				</p>
+
+				<div style="font-size: 20px;text-align: left;">
+					<ul>
+						<li>Types de tests
+							<ul>
+								<li><b style="color: rgb(186, 218, 8);">unitaires</b> : permet de tester une
+									unité fonctionnelle (un composant) du
+									système à développer.</li>
+								<li><b style="color: rgb(186, 218, 8);">d'intégration</b> : permet d'intégrer ensemble
+									les différentes unités (les composants) et de vérifier que les communications
+									inter-composant sont bien correctement réalisées.
+								</li>
+								<li><b style="color: rgb(186, 218, 8);">de validation ou de vérification</b> : on
+									vérifie que le logiciel fait bien ce pour quoi il a été développé, une fois tous les
+									composants intégrés et la procédure associée passée en succès.</li>
+								<li><b style="color: rgb(186, 218, 8);">de qualification ou d'acceptation</b> : souvent
+									cette procédure de tests est un sous-ensemble de la procédure de tests de
+									validation. </li>
+							</ul>
+						</li>
+						<li> ... une autre classification en fonction de leur nature
+							<ul>
+								<li><b style="color: rgb(186, 218, 8);">fonctionnels</b> : on vérifie qu'une
+									fonctionnalité est correctement réalisée.
+								</li>
+								<li><b style="color: rgb(186, 218, 8);">techniques</b> : on teste les aspects
+									non fonctionnels.
+									<ul>
+										<li><b style="color: rgb(186, 218, 8);">de performance</b> : on
+											cherche à mesurer certaines consommations de ressources (CPU, mémoire, ...).
+										</li>
+										<li><b style="color: rgb(186, 218, 8);">de robustesse</b> : on cherche
+											à tester des problèmes de stabilités et de fiabilités dans le temps pour
+											pouvoir
+											mesurer l'évolution d'une ressource (détection de fuites mémoire,
+											scalabilité...).</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<section>
+				<h4>Tests Unitaires</h4>
+				<p style="font-size: 25px;text-align: left; color: rgb(186, 218, 8);">
+					Wikipedia :
+					"Test unitaire : est une procédure permettant de vérifier
+					le bon fonctionnement d'une partie précise d'un logiciel ou d'une portion d'un programme [...]"
+				</p>
+				<div style="font-size: 20px;text-align: left;">
+					<ul>
+						<li>En JAVA, l'usage général est que la portion de programme soit la méthode.</li>
+						<li>Frameworks disponibles :
+							<ul>
+								<li>TestNG </li>
+								<li>Mockito </li>
+								<li>JUnit </li>
+								<li> ... Selenium, JBehave, Selenide, ... entre autres </li>
+							</ul>
+						</li>
+						<li>JUnit
+							<ul>
+								<li>JUnit 4 : publié en 2005 pour permettre la prise en compte des annotations de Java 5
+								</li>
+								<li>JUnit 5 (Jupiter) : publié en 2017, utilise des fonctionnalités de Java 8 notamment
+									les lambdas, les annotations répétées, ...
+									<ul>
+										<li>le support et l'utilisation des nouvelles fonctionnalités de Java 8 : par
+											exemple, les lambdas peuvent être utilisés dans les assertions</li>
+										<li>nouvelle architecture reposant sur plusieurs modules</li>
+										<li>le support de différents types de tests</li>
+										<li>un mécanisme d'extension qui permet l'ouverture vers des outils tiers ou des
+											API</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<p style="font-size: 25px;text-align: left; color: rgb(186, 218, 8);">
+					... ici on va utiliser donc JUnit 5 ...
+				</p>
+			</section>
+			<section>
+				<h4>Junit 5 : les bases</b></h4>
+				<div style="font-size: 20px;text-align: left;">
+					<ul>
+						<li>Il propose plusieurs <b style="color: rgb(186, 218, 8);">annotations</b> pour la définition
+							et la configuration des tests.
+						</li>
+						<li>Ecriture de tests :
+							<ul>
+								<li>il faut écrire une classe contenant des méthodes annotées pour implémenter les cas
+									de tests ou le cycle de vie des tests</li>
+								<li>les méthodes qui implémentent des cas de tests utilisent des <b
+										style="color: rgb(186, 218, 8);">assertions</b> pour faire
+									les vérifications requises</li>
+							</ul>
+						</li>
+						<li>Cycle de vie
+							<div style="font-size: 15px;text-align: left;">
+								<ul>
+									<li>BeforeAll : code executé avant tous les tests</li>
+									<li>BeforeEach : code executé avant chaque test</li>
+									<li>AfterEach : code executé après chaque test</li>
+									<li>AfterAll : code executé après tous les tests</li>
+								</ul>
+							</div>
+						</li>
+
+						<img src="img/test_unitaire_cycle_vie.png" width="40%" height="40%">
+
+					</ul>
+				</div>
+			</section>
+			<section>
+				<h4>Junit 5 : les annotations</b></h4>
+				<div style="font-size: 20px;text-align: left;">
+					<ul>
+						<li>Les annotations pour les fonctionnalités de base sont : </li>
+						<br>
+						<div style="font-size: 15px;text-align: left;">
+							<table class="tableau" width="100%" border="1" align="center" cellpadding="4"
+								cellspacing="0">
+								<tbody>
+									<tr>
+										<td>
+											Annotation
+										</td>
+										<td>
+											Rôle
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@Test
+										</td>
+										<td>
+											La méthode annotée est un cas de test. Contrairement à l'annotation @Test de
+											JUnit, celle-ci ne possède aucun attribut.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@DisplayName
+										</td>
+										<td>
+											Définir un libellé pour la classe ou la méthode de test annotée.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@BeforeEach
+										</td>
+										<td>
+											La méthode annotée sera invoquée avant l'exécution de chaque méthode de la
+											classe annotée avec @Test.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@AfterEach
+										</td>
+										<td>
+											La méthode annotée sera invoquée après l'exécution de chaque méthode de la
+											classe annotée avec @Test.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@BeforeAll
+										</td>
+										<td>
+											La méthode annotée sera invoquée avant l'exécution de la première méthode de
+											la classe annotée avec @Test.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@AfterAll
+										</td>
+										<td>
+											La méthode annotée sera invoquée après l'exécution de toutes les méthodes de
+											la classe annotées avec @Test.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@Tag
+										</td>
+										<td>
+											Définir une balise sur une classe ou une méthode qui permettra de filtrer
+											les tests exécutés.
+										</td>
+									</tr>
+									<tr>
+										<td>
+											@Disabled
+										</td>
+										<td>
+											Désactiver les tests de la classe ou la méthode annotée.
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ul>
+				</div>
+			</section>
+			<section>
+				<h4>Junit 5 : les assertions</b></h4>
+				<p style="font-size: 25px;text-align: left; color: rgb(186, 218, 8);">
+					Les assertions ont pour rôle de faire des vérifications pour le test en cours. Si ces vérifications
+					échouent, alors l'assertion lève une exception qui fait échouer le test.
+				</p>
+
+				<div style="font-size: 15px;text-align: left;">
+					<ul>
+						<li>Les assertions : </li>
+						<br>
+						<div style="font-size: 15px;text-align: left;">
+							<table class="tableau" width="100%" border="1" align="center" cellpadding="4"
+								cellspacing="0">
+								<tbody>
+									<tr>
+										<td>
+											<p>Egalité</p>
+										</td>
+										<td>
+											<p>Nullité</p>
+										</td>
+										<td>
+											<p>Exceptions</p>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											assertEquals()
+										</td>
+										<td>
+											assertNull()
+										</td>
+										<td>
+											assertThrows()
+										</td>
+									</tr>
+									<tr>
+										<td>
+											assertNotEquals()
+										</td>
+										<td>
+											assertNotNull()
+										</td>
+										<td>&nbsp;</td>
+									</tr>
+									<tr>
+										<td>
+											assertTrue()
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+									<tr>
+										<td>
+											assertFalse()
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+									<tr>
+										<td>
+											assertSame()
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+									<tr>
+										<td>
+											assertNotSame()
+										</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</ul>
+				</div>
+			</section>
+
+			<section>
+				<h4>Junit 5 : Architecture</b></h4>
+				<div>
+					<img src="img/junit_architecture.png" width="40%" height="40%">
+				</div>
+				<p style="font-size: 20px;text-align: left; ">
+					Les dépendances (maven) :
+				</p>
+				<span style="font-size: 18px;">
+					<pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+									...
+									<dependencies>
+										...
+										<dependency>
+											<groupId>org.junit.jupiter</groupId>
+											<artifactId>junit-jupiter-engine</artifactId>
+											<version>${junit.jupiter.version}</version>
+											<scope>test</scope>
+										</dependency>
+										<dependency>
+											<groupId>org.junit.jupiter</groupId>
+											<artifactId>junit-jupiter-api</artifactId>
+											<version>${junit.jupiter.version}</version>
+											<scope>test</scope>
+										</dependency>
+										<dependency>
+											<groupId>org.junit.jupiter</groupId>
+											<artifactId>junit-jupiter-params</artifactId>
+											<version>${junit.jupiter.version}</version>
+											<scope>test</scope>
+										</dependency>
+										<dependency>
+											<groupId>org.junit.platform</groupId>
+											<artifactId>junit-platform-suite</artifactId>
+											<version>${junit.platform.version}</version>
+											<scope>test</scope>
+										</dependency>
+										...
+									</dependencies>
+									</code></pre>
+				</span>
+
+			</section>
+			<section>
+				<h4>Junit 5 : Un exemple</h4>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/zoom/zoom.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/search/search.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			center: true,
+			hash: true,
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+		});
+
+	</script>
+
+</body>
+
+</html>
