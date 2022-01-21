@@ -534,9 +534,49 @@
                             <code data-trim data-line-numbers><script type="text/template">
                                 Appel de la méthode 'toString' de l'utilisateur avec l'objet : 
                                     Utilisateur{name='gustavo', login='loginGustavo', id=999}
-                                    
+
                                 Appel de la méthode 'toString' de l'utilisateur avec la réflexion : 
                                     Utilisateur{name='gustavo', login='loginGustavo', id=999}
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Visibilité des élements</h4>
+                <div style="font-size: 20px;">
+                    <ul>
+                        <li>La classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.reflect.Modifier</span> permet d'interpréter un entier renvoyé par
+                            les éléménts comme modificateurs de visibilité</li>
+                    </ul>
+
+                    <span style="font-size: 20px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                for (Field field : String.class.getDeclaredFields()) {
+                                    int modifiers = field.getModifiers();
+                                    StringBuilder builder = new StringBuilder();
+                                    if (Modifier.isPrivate(modifiers)) builder.append("private ");
+                                    if (Modifier.isProtected(modifiers)) builder.append("protected ");
+                                    if (Modifier.isPublic(modifiers)) builder.append("public ");
+                                    if (Modifier.isStatic(modifiers)) builder.append("static ");
+                                    if (Modifier.isFinal(modifiers)) builder.append("final ");
+                                    System.out.println(builder.append(field.getType().getName()).append(' ').append(field.getName()));
+                                }
+                            </script></code></pre>
+                    </span>
+                    résultat
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                private final [B value
+                                private final byte coder
+                                private int hash
+                                private static final long serialVersionUID
+                                static final boolean COMPACT_STRINGS
+                                private static final [Ljava.io.ObjectStreamField; serialPersistentFields
+                                public static final java.util.Comparator CASE_INSENSITIVE_ORDER
+                                static final byte LATIN1
+                                static final byte UTF16
                             </script></code></pre>
                     </span>
                 </div>
