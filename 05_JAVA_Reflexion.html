@@ -462,7 +462,7 @@
                 <h4>Les variables (champs) d'instance et de classe</h4>
                 <div style="font-size: 20px;">
                     <ul>
-                        <li>Une instance de Field représente un champs d'un objet :</li>
+                        <li>Une instance de <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Field</span> représente un champs d'un objet :</li>
                         <ul>
                             <li><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Object get*(Object target)</span> permet d'obtenir la valeur</li>
                             <li><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">void set*(Object target)</span> permet de changer la valeur</li>
@@ -497,6 +497,46 @@
                                 Affectivement la valeur de la variable d'instance 'name' est 'gustavo'
                                 Si on change la valeur de la variable d'instance 'name' par 'GUSTAVO'
                                 L'instance Utilisateur est : Utilisateur{name='GUSTAVO', login='loginGustavo', id=999} ... maintenant
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Les méthodes d'instance et de classe</h4>
+                <div style="font-size: 20px;">
+                    <ul>
+                        <li>Une instance de Method obtenu avec <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getDeclaredMethod(String,Class...)</span> permet
+                            d'appeler une méthode sur tous les objets d'un même type (et sous-types):</li>
+                        <li>La méthode <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Object invoke(Object.. args)</span> permet d'appeler la méthode avec des
+                            arguments</li>
+                    </ul>
+
+                    <span style="font-size: 20px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                public class UtilsateurMethodCaller {
+                                    public static void main(String[] args) throws Exception {
+                                        Method toStringMethod = Utilisateur.class.getDeclaredMethod("toString");
+                                
+                                        Utilisateur utilisateur = new Utilisateur("gustavo","loginGustavo");
+                                
+                                        System.out.println("Appel de la méthode 'toString' de l'utilisateur avec l'objet : " 
+                                                + utilisateur.toString());
+                                        System.out.println("Appel de la méthode 'toString' de l'utilisateur avec la réflexion : " 
+                                                + toStringMethod.invoke(utilisateur));
+                                    }
+                                }
+                            </script></code></pre>
+                    </span>
+                    résultat
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Appel de la méthode 'toString' de l'utilisateur avec l'objet : 
+                                    Utilisateur{name='gustavo', login='loginGustavo', id=999}
+                                    
+                                Appel de la méthode 'toString' de l'utilisateur avec la réflexion : 
+                                    Utilisateur{name='gustavo', login='loginGustavo', id=999}
                             </script></code></pre>
                     </span>
                 </div>
