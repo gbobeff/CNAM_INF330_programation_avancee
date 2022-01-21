@@ -94,9 +94,10 @@
                 </div>
             </section>
             <section>
-                <h4>Utilisation (réalisation de)</h4>
-                <div style="font-size: 20px;">
-                    <ul>
+                <h4>Utilisation</h4>
+                <div>
+                    <div>(réalisation de)</div>
+                    <ul style="font-size: 30px;">
                         <li>Débogueurs</li>
                         <li>Interprètes</li>
                         <li>Inspecteurs d'objets</li>
@@ -142,9 +143,366 @@
                     </ul>
                 </div>
             </section>
+            <section>
+                <h4><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> (et type paramétré)</h4>
+                <div style="font-size: 25px;">
+                    <ul>
+                        <li>Un objet de la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> est paramétré par le type qu'elle représente</li>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                                <code data-trim data-line-numbers><script type="text/template">
+                                    Class<String> clazz =  String.class;
+                                    String s = clazz.getDeclaredConstructor().newInstance();
+                                </script></code></pre>
+                        </span>
+                        <li>Pour <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getClass()</span>, à cause du sous-typage, la rêgle est Class&lt;? extends (type
+                            déclaré)&gt;</li>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                                <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                String s = ”Contenu de la variable s”; 
+                                Object o = s; 
+                                Class<? extends Object> clazz2 = o.getClass(); 
+                                boolean isTheSame = (clazz2 == s.getClass()); // true
+                            </script></code></pre>
+                        </span>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> par son nom et prénom</h4>
+                <div style="font-size: 25px;">
+                    <ul>
+                        <li>Permet de charger une classe par son nom complet (avec le nom du paquetage)</li>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                                <code data-trim data-line-numbers><script type="text/template">
+                                    package fr.cnam.pa.inf330.tp03.exo01;
+
+                                    public class ClassForNameIntrospector {
+                                        public static void main(String[] args) throws Exception {
+                                            Class clazz = Class.forName(args[0]);
+                                            Object obj = clazz.getConstructor().newInstance();
+                                            System.out.println("Nom de la classe inspectée : " + obj.getClass().getName());
+                                        }
+                                    }
+                                </script></code></pre>
+                        </span>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                                <code data-trim data-line-numbers><script type="text/template">
+                                    $ java fr.cnam.pa.inf330.tp03.exo01.ClassForNameIntrospector java.lang.String
+                                    Nom de la classe inspectée : java.lang.String
+                                </script></code></pre>
+                        </span>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Les types primitifs</h4>
+                <div style="font-size: 25px;">
+                    <ul>
+                        <li>les types primitifs et le type <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">void</span> ont des objets <span
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> correspondants</li>
+                        <li>type_primitif.class est typé <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class&lt;Wrapper&gt;</span> et pour <span
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">void.class</span> est
+                            typé <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class&lt;Void&gt;</span></li>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                                <code data-trim data-line-numbers><script type="text/template">
+                                    public static void main(String[] args) { 
+                                        Class<String> clazz = String.class; 
+                                        String s = clazz.getConstructor().newInstance();
+
+                                        Class<Integer> clazz2 = int.class; 
+                                        int i = clazz.clazz.getConstructor().newInstance();
+                                    }
+                                </script></code></pre>
+                        </span>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Propriété de la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span></h4>
+                <div style="font-size: 25px;">
+                    <ul>
+                        <li>Permet de savoir si la classe est :</li>
+                        <ul>
+                            <li>une annotation <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isAnnotation()</span></li>
+                            <li>une classe anonyme <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isAnonymousClass()</span></li>
+                            <li>un tableau <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isArray()</span></li>
+                            <li>un type énuméré <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isEnum()</span></li>
+                            <li>une interface <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isInterface()</span></li>
+                            <li>une classe interne/inner <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isMemberClass()</span></li>
+                            <li>une classe d'un type primitif <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isPrimitive()</span></li>
+                            <li>générée par le coompilateur <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isSynthetic()</span></li>
+                        </ul>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Propriété de la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> (exemple - code)</h4>
+                <div style="font-size: 25px;">
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                public class ClassPropretiesInspector {
+
+                                    public static void main(String[] args) {
+                                        List<Class> classes = new ArrayList<Class>(
+                                                Arrays.asList(String.class,  int.class, 
+                                                MonInnerException.class, MonOuterException.class));
+                                        classes.stream().forEach(clazz -> {
+                                            System.out.println("class " + clazz.getName());
+                                            System.out.println("\tIsPrimitive? " + clazz.isPrimitive());
+                                            System.out.println("\tIsMemberClass? " + clazz.isMemberClass() + "\n");
+                                        });
+                                    }
+                                
+                                    class MonInnerException extends Exception {
+                                        public MonInnerException(){
+                                            super("Un message d'erreur depuis MonInnerException");
+                                        }
+                                    }
+                                }
+                                
+                                class MonOuterException extends Exception {
+                                    public MonOuterException(){
+                                        super("Un message d'erreur depuis MonOuterException");
+                                    }
+                                }
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Propriété de la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> (exemple - résultat)</h4>
+                <div style="font-size: 25px;">
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                            class java.lang.String
+                                IsPrimitive? false
+                                IsMemberClass? false
+                            
+                            class int
+                                IsPrimitive? true
+                                IsMemberClass? false
+                            
+                            class fr.cnam.pa.inf330.tp05.exo01.ClassPropretiesInspector$MonInnerException
+                                IsPrimitive? false
+                                IsMemberClass? true
+                            
+                            class fr.cnam.pa.inf330.tp05.exo01.MonOuterException
+                                IsPrimitive? false
+                                IsMemberClass? false
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Hiérarchie de classes</h4>
+                <div style="font-size: 25px;">
+                    <ul>
+                        <li>Il est possible pour une classe d'obtenir :</li>
+                        <ul>
+                            <li>sa super-classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class&lt;? extends T&gt; getSuperClass()</span></li>
+                            <li>ses interfaces <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class&lt;?&gt;[] getInterfaces()</span></li>
+                        </ul>
+                        <li>... et aussi on peut : </li>
+                        <ul>
+                            <li>tester si un objet est de cette classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isInstance(Object o)</span></li>
+                            <li>tester si une classe est sous-type d'une autre <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">isAssignableFrom(Class&lt;?&gt;
+                                    clazz)</span></li>
+                            <li>caster une référence vers la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">T cast(Object o)</span></li>
+                            <li>voir une classe comme une sous-classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">&lt;U&gt; Class&lt;? extends U&gt;
+                                    asSubclass(Class&lt;U&gt; clazz)</span></li>
+                        </ul>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Hiérarchie de classes (exemple)</h4>
+                <div style="font-size: 25px;">
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                public static void main(String[] args) {
+                                    Class<? super MonInnerException> superclass = MonInnerException.class.getSuperclass();
+                                    System.out.println("La superclasse de MonInnerException est " + superclass.getName());
+                            
+                                    System.out.println("et le(s) interface(s) implémentée(s) est(sont) ");
+                                    Class<?>[] interfaces = MonInnerException.class.getInterfaces();
+                                    Arrays.stream(interfaces).forEach(itf -> {
+                                        System.out.println("\t"+itf.getName());
+                                    });
+                                }
+                            
+                                class MonInnerException extends Exception implements Serializable {
+                                    public MonInnerException(){
+                                        super("Un message d'erreur depuis MonInnerException");
+                                    }
+                                }
+                            </script></code></pre>
+                    </span>
+                    résultat
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                La superclasse de MonInnerException est java.lang.Exception
+                                et le(s) interface(s) implémentée(s) est(sont) 
+                                    java.io.Serializable
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Membres d'une <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span> </h4>
+                <div style="font-size: 20px;">
+                    <ul>
+                        <li>A partir d'une class ont peux accéder à l'ensemble de ces membres :</li>
+                        <ul>
+                            <li>les constructeurs d'objets de type <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">T</span> sont représentés par des instances de
+                                la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Constructor&lt;T&gt;</span></li>
+                            <li>les champs sont représentés par des instances de la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Field</span></li>
+                            <li>les méthodes sont représentées par des instances de la classe <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Method</span></li>
+                        </ul>
+                        <li> ... de manière générale, avec <span style="color:rgb(255, 0, 149);font-family: 'Courier New', Courier, monospace;">XXX</span> égale à <span
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Constructor</span>, <span
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Method</span>, <span
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Field</span> ou <span
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Class</span>,
+                            on sait
+                            que : </li>
+                        <ul>
+                            <li>la méthode <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getDeclaredXXXs()</span> renvoie tous les <span
+                                    style="color:rgb(255, 0, 149);font-family: 'Courier New', Courier, monospace;">XXX</span> (privés inclus) qui
+                                sont déclarés par la classe, c'est-à-dire non hérités</li>
+                            <li>la méthode <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getXXXs()</span> retourne tous les <span
+                                    style="color:rgb(255, 0, 149);font-family: 'Courier New', Courier, monospace;">XXX</span> publics, y-compris ceux qui
+                                sont hérités</li>
+                            <li>la méthode <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getDeclaredXXX(param)</span> renvoie le <span
+                                    style="color:rgb(255, 0, 149);font-family: 'Courier New', Courier, monospace;">XXX</span> déclaré, dont le nom
+                                et/ou le type des paramètres est donné en argument</li>
+                            <li>la méthode <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getXXX(param)</span> retourne le <span
+                                    style="color:rgb(255, 0, 149);font-family: 'Courier New', Courier, monospace;">XXX</span> public, hérité ou non, dont
+                                le nom et/ou les types (objets Class) des paramètres sont donnés en argument</li>
+                        </ul>
+                    </ul>
+
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Constructor<MonInnerException> declaredConstructor = 
+                                    MonInnerException.class.getDeclaredConstructor();
+
+                                Method[] declaredMethods = MonInnerException.class.getDeclaredMethods();
+
+                                Field messageField = MonInnerException.class.getField("message");
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Instaciation d'un objet à travers le(s) constructor(s)</h4>
+                <div style="font-size: 20px;">
+                    <ul>
+                        <li>On obtient un Constructor à partir de la classe en utilisant les méthodes :</li>
+                        <ul>
+                            <li><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getConstructor(Class&lt;T&gt; ... types)</span></li>
+                            <li><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">getDeclaredConstructor(Class&lt;T&gt; ... types)</span></li>
+                        </ul>
+                        <li>la méthode <span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">T newInstance(Object.. args)</span> permet d'appeler le constructeur avec
+                            des arguments</li>
+                    </ul>
+
+                    <span style="font-size: 20px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                public class Utilisateur {
+                                    String name;
+                                    String login;
+                                    int id;
+                                
+                                    public Utilisateur(String name, String login, int id){
+                                        this.name = name;
+                                        this.login = login;
+                                        this.id = id;
+                                    }
+                                
+                                    @Override
+                                    public String toString() {
+                                        return "Utilisateur{" +
+                                                "name='" + name + '\'' +
+                                                ", login='" + login + '\'' +
+                                                ", id=" + id +
+                                                '}';
+                                    }
+                                }
+
+                                public class ClassInstantiationByConstructor {
+                                    public static void main(String[] args) {
+                                        Constructor<Utilisateur> constructor = Utilisateur.class.getConstructor(String.class, String.class, int.class);
+                                        Utilisateur utilisateur = constructor.newInstance("Gustavo", "loginGustavo",667766);
+                                        System.out.println(utilisateur.toString());
+                                    }
+                                }
+                            </script></code></pre>
+                    </span>
+                    résultat
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Utilisateur{name='Gustavo', login='loginGustavo', id=667766}
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
+            <section>
+                <h4>Les variables (champs) d'instance et de classe</h4>
+                <div style="font-size: 20px;">
+                    <ul>
+                        <li>Une instance de Field représente un champs d'un objet :</li>
+                        <ul>
+                            <li><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Object get*(Object target)</span> permet d'obtenir la valeur</li>
+                            <li><span style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">void set*(Object target)</span> permet de changer la valeur</li>
+                        </ul>
+                    </ul>
+                    <span style="font-size: 20px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                public class UtilsateurFieldAccessor {
+                                    public static void main(String[] args) throws Exception {
+                                        Field nameField = Utilisateur.class.getDeclaredField("name");
+                                        // la variable est privée, il faut donc passer outre la sécurité
+                                        nameField.setAccessible(true);
+                                
+                                        Utilisateur utilisateur = new Utilisateur("gustavo","loginGustavo");
+                                        System.out.println("L'instance Utilisateur est : " + utilisateur.toString());
+                                        String nameValue = (String)nameField.get(utilisateur);
+                                        System.out.println("Affectivement la valeur de la variable d'instance 'name' est '" + nameValue+"'");
+                                
+                                        System.out.println("Si on change la valeur de la variable d'instance 'name' par 'GUSTAVO'");
+                                        nameField.set(utilisateur,"GUSTAVO");
+                                        System.out.println("L'instance Utilisateur est : " + utilisateur.toString() + " ... maintenant");
+                                    }
+                                }
+                            </script></code></pre>
+                    </span>
+                    résultat
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                L'instance Utilisateur est : Utilisateur{name='gustavo', login='loginGustavo', id=999}
+                                Affectivement la valeur de la variable d'instance 'name' est 'gustavo'
+                                Si on change la valeur de la variable d'instance 'name' par 'GUSTAVO'
+                                L'instance Utilisateur est : Utilisateur{name='GUSTAVO', login='loginGustavo', id=999} ... maintenant
+                            </script></code></pre>
+                    </span>
+                </div>
+            </section>
         </div>
     </div>
-
     <script src="dist/reveal.js"></script>
     <script src="plugin/zoom/zoom.js"></script>
     <script src="plugin/notes/notes.js"></script>
