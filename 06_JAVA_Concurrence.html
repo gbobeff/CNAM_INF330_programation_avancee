@@ -325,8 +325,9 @@
                         <ul style="font-size: 30px;">
                             <li>Limitations</li>
                             <ul>
-                                <li>lein fort entre le traitement (quoi) et la métode d'exécution (comment)</li>
-                                <li>impossible d'éxécuter le même traitement dans threads differents sans réperter le code</li>
+                                <li>lein fort entre le traitement (<b style="color: rgb(186, 218, 8);font-style: italic;">quoi</b>) et la méthode d'exécution (<b
+                                        style="color: rgb(186, 218, 8);font-style: italic;">comment</b>)</li>
+                                <li>impossible d'exécuter le même traitement dans threads différents sans répéter le code</li>
                             </ul>
                             <li>Solution ? On utilise l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> ... </li>
                         </ul>
@@ -336,25 +337,457 @@
             <section>
                 <!-- Runnables -->
                 <section>
-                    <h4>Méthode pratique : utilisation de l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <h4>Méthode pratique : l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Runnable</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>L'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> permet de créer un objet, que l'on utilisera ensuite comme
+                                constructeur d'un Thread.</li>
+                            <li>C'est la méthode <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">start()</b> de l'objet qui sera responsable de la création et de
+                                l'activation du thread.</li>
+                        </ul>
+                        <span style="font-size: 20px;">
+                            <pre data-id="code-animation">
+                                <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                    public class SimpleRunnable implements Runnable {
+                                        @Override
+                                        public void run() {
+                                            try {
+                                                Thread.sleep(1000 * (int) ((Math.random() * (5 - 1)) + 1));
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                            System.out.println("Je suis un Runnable dont le nom de mon Thread est '" +
+                                                    Thread.currentThread().getName()+"'");
+                                        }
+                                    
+                                        public static void main(String[] args) {
+                                            System.out.println("Je suis l'Application et mon thread est '" + 
+                                                Thread.currentThread().getName()+"'");
+                                            new Thread(new SimpleRunnable(),"ASimpleRunnable1").start();
+                                            new Thread(new SimpleRunnable(),"ASimpleRunnable2").start();
+                                            new Thread(new SimpleRunnable(),"ASimpleRunnable3").start();
+                                        }
+                                    }
+                            </script></code></pre>
+                        </span>
+                        résultat
+                        <span style="font-size: 20px;">
+                            <pre data-id="code-animation">
+                        <code data-trim data-line-numbers><script type="text/template">
+                            Je suis l'Application et mon thread est 'main'
+                            Je suis un Runnable dont le nom de mon Thread est 'ASimpleRunnable2'
+                            Je suis un Runnable dont le nom de mon Thread est 'ASimpleRunnable1'
+                            Je suis un Runnable dont le nom de mon Thread est 'ASimpleRunnable3'
+                        </script></code></pre>
+                        </span>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode pratique : l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Runnable</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Avec l'introduction des <b style="color: rgb(186, 218, 8);">interfaces fonctionnelles</b> (comportant exactement une et une seule méthode publique), on peut écrire un
+                                objet runnnable comme il suit : </li>
+                        </ul>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                                <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                    public interface Runnable {
+                                        public void run();
+                                    }
+                            </script></code></pre>
+                        </span>
+                        <span style="font-size: 25px;">
+                            <pre data-id="code-animation">
+                        <code data-trim data-line-numbers><script type="text/template">
+                            public class RunnableAsFunctionalInterface {
+                                public static void main(String[] args) {
+                                    Runnable runnable = () -> {
+                                        try {
+                                            Thread.sleep(1000 * (int) ((Math.random() * (5 - 1)) + 1));
+                                            System.out.println("Je suis un Runnable dont le nom de mon Thread est '" +
+                                                    Thread.currentThread().getName() + "'");
+                                        } catch (InterruptedException e) {
+                                            System.out.println("moi, le thread '" + Thread.currentThread().getName() +
+                                                    "', je suis interrompu ? mais wtf!!!");
+                                        }
+                                    };
+                                    new Thread(runnable, "Processus-léger").start();
+                                }
+                            }
+                        </script></code></pre>
+                        </span>
+                    </div>
+                </section>
+                <section>
+                    <h4>Limitations des méthodes simples</h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>On doit créer un thread manuellement à chaque fois qu'un traitement asynchrone doit être exécuté.</li>
+                            <li>Augmente la complexité des applications (risque de contention).</li>
+                            <li>Consomation de mémoire peu optimisée.</li>
+                            <li>Adaptées pour de petites applications.</li>
+                        </ul>
+                        <ul style="font-size: 25px;">
+                            <li>Solution ? utilisation du framework Executor</li>
+                            <ul>
+                                <li>disponible dans le package <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.concurrent</b> depuis Java 5</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
                     <div>
                         <ul style="font-size: 20px;">
-                            <li>Cycle de vie</li>
-                            <img src="img/threads_cyle_vie.png" width="80%" height="80%">
+                            <li>Eléments fondamentaux du frameworks sont : </li>
+                            <ul>
+                                <li>l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Callable</b> (similaire à l'interface <b
+                                        style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> mais elle permet
+                                    aussi de retourner une valeur)</li>
+                                <span style="font-size: 25px;">
+                                    <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public interface Callable<T> {
+                                                public T call();
+                                            }
+                                    </script></code></pre>
+                                </span>
+                                <li>l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Executor</b></li>
+                                <span style="font-size: 25px;">
+                                    <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public interface Executor {
+                                                void execute(Runnable command);
+                                             }
+                                    </script></code></pre>
+                                </span>
+                                <li>l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">ExecutorService</b></li>
+                                <span style="font-size: 25px;">
+                                    <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public interface ExecutorService extends Executor {
+                                                // Exécution des tâches
+                                                public void submit(Runnable job);
+                                                public Future<V> submit(Callable<V> job);
+                                              
+                                                // Cyle de vie
+                                                public void shutdown();
+                                                public List&lt;Runnable&gt; shutdownNow();
+                                                public boolean isShutdown();
+                                                ...
+                                             }
+                                    </script></code></pre>
+                                </span>
+                                <li>l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b></li>
+                                <li>et surtout la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Future</b></li>
+                            </ul>
                         </ul>
                     </div>
                 </section>
                 <section>
-                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
                     <div>
                         <ul style="font-size: 30px;">
-                            <li>Limitations</li>
-                            <ul>
-                                <li>lein fort entre le traitement (quoi) et la métode d'exécution (comment)</li>
-                                <li>impossible d'éxécuter le même traitement dans threads differents sans réperter le code</li>
+                            <li>la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Future&lt;T&gt;</b></li>
+                            <ul style="font-size: 25px;">
+                                <li>le traitement associé à un objet <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> ou <b
+                                        style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Callable</b> est exécuté dans un thread</li>
+                                <li>en générale le résultat du traitement n'est pas disponible avant un certain temps</li>
+                                <li>dans ce cas on peut attendre le résultat et le récupérer dans un objet <b
+                                        style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Future&lt;T&gt;</b></li>
                             </ul>
-                            <li>Solution ? On utilise l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> ... </li>
                         </ul>
+                    </div>
+                    <span style="font-size: 25px;">
+                        <pre data-id="code-animation">
+                            <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                public interface Future<V> {
+                                    // retourne la valeur du traitement quand elle est disponible
+                                    public V get(); 
+                                    // retourne la valeur du traitement mais elle attends 'timeout' unités de temps
+                                    public V get(long timeout, TimeUnit unit); 
+                                    // retourne true si le traitement est terminé
+                                    public boolean isDone(); 
+                                    // permet d'arrêter le traitement 
+                                    // (même s'il est cours d'exécution => mayInterruptIfRunning = true)
+                                    public boolean cancel(boolean mayInterruptIfRunning); 
+                                    // retourne true si le traitement a été arrêté
+                                    public boolean isCancelled();
+                                 }
+                        </script></code></pre>
+                    </span>
+                </section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Liste (partielle) des méthodes de l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">ExecutorService</b> : </li>
+                            <table class="tableau" width="100%" border="1" align="center" cellpadding="4" cellspacing="0" style="font-size: 15px;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>Méthode</p>
+                                        </td>
+                                        <td>
+                                            <p>Fonctionnalité</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            void execute(Runnable command)
+                                        </td>
+                                        <td>
+                                            exécute le traitement mais elle ne retourne aucun résultat
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Future&lt;?&gt; submit(Runnable command)<br>
+                                            Future&lt;V&gt; submit(Callable&lt;V&gt; task)
+                                        </td>
+                                        <td>
+                                            exécute le traitement en retournant le résultat du traitement dans un objet Future&lt;V&gt; et le résultat est de type V
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            void shutdown()
+                                        </td>
+                                        <td>
+                                            demande au ExecutorService de ne plus accepter de tâches et il arrête le ExecutorService une fois tous les threads en cours terminés
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            List&lt;Runnable&gt; shutdownNow()
+                                        </td>
+                                        <td>
+                                            arrête les tâches en cours et retourne la liste de tâches qui n'ont pas être exécutées
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            boolea isShutdown
+                                        </td>
+                                        <td>
+                                            retourne true si l'ExecutorService est arrêté (tous les threads terminés)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            boolean awaitTermination(long timeout, TimeUnit unit)
+                                        </td>
+                                        <td>
+                                            permet d'attendre l'arrêt de l'ExecutorService pendant une période de temps spécifique
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            T invokeAny(Collection&lt;Callable&lt;T&gt;&gt; tasks)
+                                        </td>
+                                        <td>
+                                            exécute une collection de threads Callable, retourne un objet instance du type paramétré T, correspondant au résultat du premier thread
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            List&lt;Future&lt;T&gt;&gt; invokeAll(Collection&lt;Callable&lt;T&gt;&gt; tasks)
+                                        </td>
+                                        <td>
+                                            retourne une liste de résultats Future&lt;T&gt; dont l'ordre respecte le même positionnement des threads dans la collection d'entrées et l'ensemble des
+                                            résultats est obtenu et utilisable que lorsque tous les threads en entrée ont terminé leur exécution
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li><b style="color: rgb(186, 218, 8);">Pool de threads</b></li>
+                            <ul>
+                                <li>Permet de contenir un ensemble de threads qui pourront être utilisés pour exécuter des tâches.</li>
+                                <li>Ils sont particulièrement utiles pour exécuter des tâches similaires et indépendantes.</li>
+                                <li>Chaque thread consomme de la ressource (CPU et mémoire)</li>
+                                <ul>
+                                    <li>le nombre de threads exécutables dépend </li>
+                                    <ul>
+                                        <li>des ressources de la machine </li>
+                                        <li>du système d'exploitation</li>
+                                    </ul>
+                                </ul>
+                                <li>Nombre de threads disponibles sur la machine</li>
+                                <span style="font-size: 25px;">
+                                    <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public class NombreThreadsDisponibles {
+                                                public static void main(String[] args) {
+                                                    System.out.println("Nombre de threads disponibles : " + 
+                                                        Runtime.getRuntime().availableProcessors());
+                                                }
+                                            }
+                                    </script></code></pre>
+                                </span>
+                                résultat
+                                <span style="font-size: 20px;">
+                                    <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Nombre de threads disponibles : 8
+                            </script></code></pre>
+                                </span>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Pour simplifier l'utilisation de l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">ExecutorService</b>, Java fournit
+                                l'implémentation <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Executors</b></li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public class Executors {
+                                                public ExecutorService newSingleThreadExecutor()             {...};
+                                                public ExecutorService newFixedThreadPool(int nbThreads)     {...};
+                                                public ExecutorService newCachedThreadPool()                 {...};
+                                                public ExecutorService newSingleThreadScheduledExecutor()    {...};
+                                                public ExecutorService newScheduledThreadPool(int nbThreads) {...};
+                                                // (...)
+                                             }
+                                    </script></code></pre>
+                            </span>
+                            <ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Exemple de pool simple (un seul thread)</li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public class SimpleExecutor {
+                                                public static void main(String[] args) {
+                                                    Runnable runnableTask = () -> {
+                                                        try {
+                                                            TimeUnit.MILLISECONDS.sleep(300);
+                                                            System.out.println("Thread : " + Thread.currentThread().getName());
+                                                        } catch (InterruptedException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    };
+                                                    ExecutorService executorService = Executors.newSingleThreadExecutor();
+                                                    executorService.execute(runnableTask);
+                                                }
+                                            }
+                                    </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 20px;">
+                                <pre data-id="code-animation">
+                        <code data-trim data-line-numbers><script type="text/template">
+                            Thread : pool-1-thread-1
+                        </script></code></pre>
+                            </span>
+                            <ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Exemple : pool de 4 threads</li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public class NombreFixeThreads {
+                                                public static void main(String... args) {
+                                            
+                                                    Runnable tache = () -> {
+                                                        try {
+                                                            TimeUnit.MILLISECONDS.sleep(300);
+                                                            System.out.println("Thread : " + 
+                                                                Thread.currentThread().getName());
+                                                        } catch (InterruptedException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    };
+                                                    // Pool avec 4 threads
+                                                    ExecutorService pool = Executors.newFixedThreadPool(4);
+                                                    // Exécuter 6 fois la même tâche
+                                                    IntStream.range(0, 6).forEach(i -> {
+                                                        pool.submit(tache);
+                                                    });
+                                                    pool.shutdown();
+                                                    System.out.println("Je suis dans le thread : " + 
+                                                        Thread.currentThread().getName());
+                                                }
+                                            }
+                                    </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 20px;">
+                                <pre data-id="code-animation">
+                        <code data-trim data-line-numbers><script type="text/template">
+                            Je suis dans le thread : main
+                            Thread : pool-1-thread-2
+                            Thread : pool-1-thread-1
+                            Thread : pool-1-thread-3
+                            Thread : pool-1-thread-4
+                            Thread : pool-1-thread-2
+                            Thread : pool-1-thread-1
+                        </script></code></pre>
+                            </span>
+                            <ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Utilisation du framework <b style="color: rgb(186, 218, 8);">Executor</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Exemple : utilisation de Callable pour retourner une valeur</li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                        <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                            public class CallableRetourneString {
+
+                                                public static void main(String[] args) {
+                                                    ExecutorService executorService = Executors.newSingleThreadExecutor();
+                                                    Callable<String> cble1 = new Callable<String>() {
+                                                        @Override
+                                                        public String call() throws Exception {
+                                                            return "Je suis le callable cble1";
+                                                        }
+                                                    };
+                                                    Future<String> tache = executorService.submit(cble1);
+                                                    try {
+                                                        String res = tache.get();
+                                                        System.out.println("Résult de la tache 'cble1' : " + res);
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    executorService.shutdown();
+                                                }
+                                            }
+                                    </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 20px;">
+                                <pre data-id="code-animation">
+                        <code data-trim data-line-numbers><script type="text/template">
+                            Résult de la tache 'cble1' : Je suis le callable cble1
+                        </script></code></pre>
+                            </span>
+                            <ul>
                     </div>
                 </section>
             </section>
