@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>JAVA - Concurrence</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/league.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section>
+                <h3>Langage JAVA</h3>
+                <h4>Concurrence</h4>
+
+                <p>
+                    <small>Module INF330 - Programmation avancée </small>
+                </p>
+                <p>
+                    <small>Gustavo BOBEFF</small>
+                </p>
+                <p>
+                    <small>2021 - 2022</small>
+                </p>
+                <img src="img/logo_cnam_na.png">
+            </section>
+            <section>
+                <h4>Définition</h4>
+                <div>
+                    <ul style="font-size: 30px;text-align: left;">
+                        <li>Définition Wikipedia : </li>
+                        <ul>
+                            <li>La programmation concurrente est un style de programmation tenant compte, dans un programme, de l'existence de plusieurs piles
+                                sémantiques. Ces piles peuvent être appelées <b style="color: rgb(186, 218, 8);">threads</b>, <b style="color: rgb(186, 218, 8);">processus</b> ou <b
+                                    style="color: rgb(186, 218, 8);">tâches</b>.</li>
+                            <li>Elles sont matérialisées en machine par une pile d'exécution et un ensemble de données
+                                privées.</li>
+                            <li> Les threads disposent d'une zone de mémoire partagée alors que les processus sont strictement isolés.</li>
+                        </ul>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>L’exécution concurrente, omniprésente ...</h4>
+                <div>
+                    <ul style="font-size: 30px;text-align: left;">
+                        <li>tous les jours, on utilise le téléphone mobile sans se poser de questions</li>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>on peut téléphoner et recevoir des sms en parallèle</li>
+                            <li>l'alarme réveil peut se déclencher pendant qu'on est en
+                                train d’écouter de la musique ou regarder une vidéo</li>
+                            <li>les applications agissent de manière collaborative</li>
+                            <li>cette collaboration repose sur des concepts et outils dédiés
+                                fournis par le système d’exploitation</li>
+                        </ul>
+                        <li>tous les jours, on utilise un browser pour consulter des informations sur le web</li>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>on est potentiellement des dizaines / centaines / milliers à accéder à certains sites simultanément mais on n'a pas le sentiment d'attendre</li>
+                            <li>les serveurs Web sont capables de traiter un grand nombres de
+                                requêtes en parallèle</li>
+                            <li>cette parallélisation repose aussi sur des concepts et outils dédiés fournis par le système d’exploitation</li>
+                        </ul>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Domaines d'application</h4>
+                <div>
+                    <ul style="font-size: 30px;text-align: left;">
+                        <li>Entrées/sorties non-bloquantes</li>
+                        <li>Alarmes, Réveil, Déclenchementpériodique</li>
+                        <li>Algorithmes parallèles</li>
+                        <li>Modélisation d’activités parallèles</li>
+                        <li>Méthodologies</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>les processus</h4>
+                <div>
+                    <ul style="font-size: 30px;text-align: left;">
+                        <li>Un système <b style="color: rgb(186, 218, 8);">multi-tâches</b> est capable d'exécuter plusieurs programmes en parallèle sur une même machine.</li>
+                        <ul style="font-size: 25px;text-align: left;">
+                            <li>La plupart du temps, une machine n'a qu'un seul processeur qui ne peut exécuter qu'un seul programme à la fois.</li>
+                        </ul>
+                        <li>Un programme en cours d'éxécution est appelé un <b style="color: rgb(186, 218, 8);">processus</b>.</li>
+                        <li>La plupart des systèmes d'exploitation sont équipés d'un <b style="color: rgb(186, 218, 8);">ordonnançeur</b> de tâches qui donne à tour de rôle le processeur aux
+                            processus.</li>
+                        <li>Chaque processus est activé de façon cyclique et pendant une courte durée</li>
+                        <ul style="font-size: 25px;text-align: left;">
+                            <li>L'utilisateur a l'impression que plusieurs processus sont en cours d'exécution</li>
+                        </ul>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>les classes de processus</h4>
+                <div>
+                    <ul style="font-size: 30px;text-align: left;">
+                        <li>Processus = <b style="color: rgb(186, 218, 8);">ensemble d'instructions</b> + <b style="color: rgb(186, 218, 8);">état d'exécution</b> (pile, registres, pc, tas,
+                            descripteurs d'E/S, gestionnaires de signaux ...)</li>
+                        <li>Deux classes principales de processus</li>
+                        <ul style="font-size: 25px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Processus lourd</b> (ou tâche) : ne partage pas son état (sauf des espaces mémoire partagés déclarés explicitement)</li>
+                            <li><b style="color: rgb(186, 218, 8);">Processus léger</b> (ou thread) : partage son tas, ses descripteurs, ...</li>
+                        </ul>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <h4>Les Threads</h4>
+                <div>
+                    <ul style="font-size: 30px;">
+                        <li>Les ressources allouées à un processus (temps processeur, mémoire) vont être partagées entre les threads qui le composent.</li>
+                        <li>Les threads d'un même processus partagent le même espace d'adressage,les mêmes variables d'environnement, les mêmes données, ... contrairement aux processus.</li>
+                        <li>Un processus possède au moins un thread (qui exécute le programme principal <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">main()</b>).
+                        </li>
+                        <li>Les programmes qui utilisent plusieurs threads sont dits <b style="color: rgb(186, 218, 8);">multithreadés</b>.</li>
+                        <li>Les threads font partie intégrante du langage JAVA. Elles sont gérées grâce à la classe <b
+                                style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Thread</b>.</li>
+                    </ul>
+                </div>
+            </section>
+            <section>
+                <!-- Threads -->
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>créer une classe qui hérite de la class Thread</li>
+                            <li>redéfnir la méthode <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">run()</b> pour y inclure les traitements à exécuter par le thread
+                            </li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class SimpleThread extends Thread {
+                                            @Override
+                                            public void run() {
+                                                System.out.println("Je suis un SimpleThread et mon nom est '" + 
+                                                        Thread.currentThread().getName()+"'");
+                                            }
+
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>pour créer et exécuter le thread, il faut instancier un objet et appeler sa méthode <b
+                                    style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">start()</b> qui va créer le thread et elle-même appeler la métho de <b
+                                    style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">run()</b></li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public static void main(String[] args) {
+                                            new SimpleThread().start();
+                                            System.out.println("Je suis l'Application et mon thread est '" + 
+                                                    Thread.currentThread().getName()+"'");
+                                        }
+                                </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Je suis l'Application et mon thread est 'main'
+                                Je suis un SimpleThread et mon nom est 'Thread-0'
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 25px;">
+                            <li>Difference entre <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">run()</b> et <b
+                                    style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">start()</b> : la méthode <b
+                                    style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">run()</b> contient le code à exécuter par le thread : elle peut
+                                être appelée mais aucun nouveau thread n'est lancé.</b></li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public static void main(String[] args) {
+                                            new SimpleThread().run();
+                                            System.out.println("Je suis l'Application et mon thread est '" + 
+                                                    Thread.currentThread().getName()+"'");
+                                        }
+                                </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Je suis un SimpleThread et mon nom est 'main'
+                                Je suis l'Application et mon thread est 'main'
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li><b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Thread.sleep</b> : utilisée pour arrêter l’exécution du thread en cours pendant une
+                                durée spécifique</li>
+                            <li>Une fois cette durée écoulée, le thread qui s’exécute le plus tôt recommence à s’exécuter.</li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class SimpleThreadWithSleep {
+                                            public static void main(String[] args) throws InterruptedException {
+                                                Thread unThreadAvecSommeil = new Thread("Processus-léger-marmotte") {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            System.out.println("moi, le thread'" + 
+                                                                Thread.currentThread().getName() + "', je suis fatigué.");
+                                                            Thread.sleep(1000 * 5);
+                                                            System.out.println("moi, le thread'" + 
+                                                                Thread.currentThread().getName()+"', j'ai fini mon travail après une petite sieste'.");
+                                                        } catch (InterruptedException e) {
+                                                            System.out.println("moi, le thread '" + 
+                                                                Thread.currentThread().getName()+"', je suis interrompu ? mais wtf!!!" );
+                                                        }
+                                                    }
+                                                };
+                                        
+                                                System.out.println("Lancement de l'application");
+                                                unThreadAvecSommeil.start();
+                                                System.out.println("Je suis l'Application et mon thread est '" 
+                                                    + Thread.currentThread().getName()+"'");
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Lancement de l'application
+                                Je suis l'Application et mon thread est 'main'
+                                moi, le thread 'Processus-léger-marmotte', je suis fatigué.
+                                moi, le thread 'Processus-léger-marmotte', j'ai fini mon travail après une petite sieste'.
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>On peut interrompre le thread avec la méthode <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">interrupt()</b> s'il est toujours en
+                                cours d'exécution.</li>
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class SimpleThreadWithSleep {
+                                            public static void main(String[] args) throws InterruptedException {
+                                                Thread unThreadAvecSommeil = new Thread("Processus-léger-marmotte") {
+                                                    @Override
+                                                    public void run() {
+                                                        try {
+                                                            System.out.println("moi, le thread'" + 
+                                                                Thread.currentThread().getName() + "', je suis fatigué.");
+                                                            Thread.sleep(1000 * 5);
+                                                            System.out.println("moi, le thread'" + 
+                                                                Thread.currentThread().getName()+"', j'ai fini mon travail après une petite sieste'.");
+                                                        } catch (InterruptedException e) {
+                                                            System.out.println("moi, le thread '" + 
+                                                                Thread.currentThread().getName()+"', je suis interrompu ? mais wtf!!!" );
+                                                        }
+                                                    }
+                                                };
+                                        
+                                                System.out.println("Lancement de l'application");
+                                                unThreadAvecSommeil.start();
+                                                Thread.sleep(1000 * 2);
+                                                unThreadAvecSommeil.interrupt();
+                                                System.out.println("Je suis l'Application et mon thread est '" + 
+                                                    Thread.currentThread().getName()+"'");
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 25px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Lancement de l'application
+                                moi, le thread 'Processus-léger-marmotte', je suis fatigué.
+                                moi, le thread 'Processus-léger-marmotte', je suis interrompu ? mais wtf!!!
+                                Je suis l'Application et mon thread est 'main'
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Cycle de vie</li>
+                            <img src="img/threads_cyle_vie.png" width="80%" height="80%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 30px;">
+                            <li>Limitations</li>
+                            <ul>
+                                <li>lein fort entre le traitement (quoi) et la métode d'exécution (comment)</li>
+                                <li>impossible d'éxécuter le même traitement dans threads differents sans réperter le code</li>
+                            </ul>
+                            <li>Solution ? On utilise l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> ... </li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <!-- Runnables -->
+                <section>
+                    <h4>Méthode pratique : utilisation de l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Cycle de vie</li>
+                            <img src="img/threads_cyle_vie.png" width="80%" height="80%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Méthode simple : utilisation de la classe <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">java.lang.Thread</b></h4>
+                    <div>
+                        <ul style="font-size: 30px;">
+                            <li>Limitations</li>
+                            <ul>
+                                <li>lein fort entre le traitement (quoi) et la métode d'exécution (comment)</li>
+                                <li>impossible d'éxécuter le même traitement dans threads differents sans réperter le code</li>
+                            </ul>
+                            <li>Solution ? On utilise l'interface <b style="color: rgb(186, 218, 8);font-family: 'Courier New', Courier, monospace;">Runnable</b> ... </li>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+
+        // Also available as an ES module, see:
+        // https://revealjs.com/initialization/
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            pdfMaxPagesPerSlide: 1,
+            pdfSeparateFragments: true,
+            pdfPageHeightOffset: -1,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+        });
+
+    </script>
+
+</body>
+
+</html>
