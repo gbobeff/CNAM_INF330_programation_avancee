@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>JAVA - Modéllisation OO</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/league.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+
+    <div class="reveal">
+
+        <div class="slides">
+            <section>
+                <h3>Langage JAVA</h3>
+                <h4>Modélisation OO</h4>
+
+                <p>
+                    <small>Module INF330 - Programmation avancée </small>
+                </p>
+                <p>
+                    <small>Gustavo BOBEFF</small>
+                </p>
+                <p>
+                    <small>2021 - 2022</small>
+                </p>
+                <img src="img/logo_cnam_na.png">
+            </section>
+            <section>
+                <section>
+                    <h4>Pourquoi modéliser?</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Abstraction = simplification</b></li>
+                            <ul>
+                                <li>Ignorer les détails insignifiants.</li>
+                                <li>Ressortir les détails les plus importants.</li>
+                                <li>La modélisation simplifie la compréhension et la communication autour du problème, elle ne simplfie pas le problème lui même.</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Pourquoi modéliser?</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Gérer la complexité</b></li>
+                            <ul>
+                                <li>Permet de réflechir sur la conception.</li>
+                                <li>Séparation des préoccupations</li>
+                                <ul>
+                                    <li>Plusieurs points de vues sur le même probléme (statique, comportementale, etc.)</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Pourquoi modéliser?</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Communiquer</b></li>
+                            <ul>
+                                <li>Plusieurs acteurs dans le procédé de développement.</li>
+                                <li>Le code n'est pas toujours compréhensible par les développeurs qui ne l'ont pas écrit</li>
+                                <li>Nouvelles façons de travailler</li>
+                                <ul>
+                                    <li>outsourcing, sous-traitance, etc.</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Pourquoi modéliser?</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Pérénniser la connaissance sur le métier</b></li>
+                            <ul>
+                                <li>Projets de longue durée.</li>
+                                <ul>
+                                    <li>Rotation importante des intervenants</li>
+                                </ul>
+                                <li>Conserver le savoir-faire sans les détails techniques</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Pourquoi modéliser?</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Augmenter la productvité</b></li>
+                            <ul>
+                                <li>Génération de code à partir des modèles (Model-Driven Engineering)</li>
+                                <li>Identifier les variantes</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>Support de la modélisation</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li>Langage</li>
+                            <ul>
+                                <li>But : pouvoir transmettre le résultat de la modélisation d'une solution.</li>
+                            </ul>
+                            <li>Plusieurs langages existaient/existent mais un seul a réussi à s'imposer sur la marché.</li>
+                            <ul>
+                                <li>UML (Unified Modeling Language) : Il s'agit d'une <b style="color: rgb(186, 218, 8);">notation graphique</b> internationale standard de 
+                                    l'industrie utilisée pour décrire, visualiser, construire et documenter la phase de modélisation</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>UML : Histoire</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li>Au milieu des années 90, G. Booch, I. Jacobson et J. Rumbaugh (chacun auteur d'un langage 
+                                différent de modélisation) ont chacun commencé à adopter les idées des autres</li>
+                            <li>Les 3 auteurs ont souhaité créer un Langage de Modélisation Unifié.</li>
+                            <li>Aujourd'hui : </li>
+                            <ul>
+                                <li>lengage de modélisation OO le plus connu et utilisé</li>
+                                <li>appliqué à plusieurs domaines </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Utilisations</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li><b style="color: rgb(186, 218, 8);">Explorer</b> : Comme langage pour faire de croquis, esquisses, ébauches, ...</li>
+                            <ul>
+                                <li>permet d'analyser, réfléchir, décider, de communiquer rapidement autour d'une idée</li>
+                            </ul>
+                            <li><b style="color: rgb(186, 218, 8);">Spéficier</b> : Comme langage de spécification de modèles, patrons, ...</li>
+                            <ul>
+                                <li>permet de spécifier modèles complets, prêts à être codés</li>
+                                <li>pour prendre des décisions poussées de design</li>
+                                <li>utilisé pour la génération de code (classes et signatures de méthodes, pas le corps)</li>
+                            </ul>
+                            <li><b style="color: rgb(186, 218, 8);">Produire</b> : Comme langage de programmation</li>
+                            <ul>
+                                <li>génération et compilation du code à partir du modèle</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagrammes</h4>
+                    <div>
+                        <table class="tableau" width="100%" border="1" align="center" cellpadding="4"
+                        cellspacing="0">
+                        <tbody style="font-size: 15px;text-align: left;">
+                            <tr>
+                                <td>
+                                    Classification
+                                </td>
+                                <td>
+                                    Types
+                                </td>
+                                <td>
+                                    Description
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4">
+                                    Structural
+                                </td>
+                                <td>
+                                    de <b style="color: rgb(186, 218, 8);">classes</b> 
+                                </td>
+                                <td>
+                                    décrit la structure des classes et leurs relations
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    de composants
+                                </td>
+                                <td>
+                                    sert à montrer le lien entre les différents composants d'une application
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    de déploiement
+                                </td>
+                                <td>
+                                    sert à identifier l'architecture physique (distributions, moyens, performance, etc.)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    de packages
+                                </td>
+                                <td>
+                                    un package sert d'espace de désignation (nommage), ce digramme permet de grouper des éléments
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="5">
+                                    Comportamental
+                                </td>
+                                <td>
+                                    de cas d'utilisation
+                                </td>
+                                <td>
+                                    centré utilisateur, ils connaissent l'aspect fonctionnel du système
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    de <b style="color: rgb(186, 218, 8);">séquences</b>
+                                </td>
+                                <td>
+                                    représentation des exemples d'interaction entre objets dans la réalisation de processus de l'application
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    de collaboration
+                                </td>
+                                <td>
+                                    similaire au diagramme de séquences mais l'accent est plus sur les objets impliqués que sur l'aspect temporel des échanges de messages
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    de états/transitions
+                                </td>
+                                <td>
+                                    décrivent les séquences d'états d'un objet ou d'une opération
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    d'activités
+                                </td>
+                                <td>
+                                    souvent utilisé pour modéliser les workflow (processus métier)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+
+        // Also available as an ES module, see:
+        // https://revealjs.com/initialization/
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            center: true,
+            hash: true,
+            pdfMaxPagesPerSlide: 1,
+            pdfSeparateFragments: true,
+            pdfPageHeightOffset: -1,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight]
+        });
+
+    </script>
+
+</body>
+
+</html>
