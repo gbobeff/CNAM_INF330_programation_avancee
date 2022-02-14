@@ -532,6 +532,15 @@
                         </ul>
                     </div>
                 </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Un exemple </h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <img src="img/diag_classes_exemple.png" width="50%" height="50%">
+                        </ul>
+                    </div>
+                </section>
             </section>
             <section>
                 <section>
@@ -650,7 +659,7 @@
                 </section>
                 <section>
                     <h4>Patrons de conception (design pattern)</h4>
-                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Creational : Singleton</h5>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Creational : Singleton pattern </h5>
                     <div>
                         <ul style="font-size: 20px;text-align: left;">
                             <li>Objective : Garantir qu'une classe aura une seule instance et fournir un accès global à cette instance.</li>
@@ -661,7 +670,7 @@
                 </section>
                 <section>
                     <h4>Patrons de conception (design pattern)</h4>
-                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Creational : Singleton (implémentation JAVA)</h5>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Creational : Singleton pattern (implémentation JAVA)</h5>
                     <div>
                         <ul style="font-size: 20px;">
                             <li>Classe Connection</b></li>
@@ -718,7 +727,7 @@
                 </section>
                 <section>
                     <h4>Patrons de conception (design pattern)</h4>
-                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite</h5>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite pattern</h5>
                     <div>
                         <ul style="font-size: 20px;text-align: left;">
                             <li>Objective : Composer plusieurs objets dans une structure d'arbre pour représenter une hierarchie 
@@ -744,7 +753,7 @@
                 </section>
                 <section>
                     <h4>Patrons de conception (design pattern)</h4>
-                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite (implémentation JAVA)</h5>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite pattern (implémentation JAVA)</h5>
                     <div>
                         <ul style="font-size: 20px;">
                             <li>Classe Component</b></li>
@@ -814,7 +823,7 @@
                 </section>
                 <section>
                     <h4>Patrons de conception (design pattern)</h4>
-                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite (implémentation JAVA)</h5>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite pattern (implémentation JAVA)</h5>
                     <div>
                         <ul style="font-size: 20px;">
                             <li>Classe Component</b></li>
@@ -858,7 +867,7 @@
                 </section>
                 <section>
                     <h4>Patrons de conception (design pattern)</h4>
-                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite (implémentation JAVA)</h5>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite pattern (implémentation JAVA)</h5>
                     <div>
                         <ul style="font-size: 20px;">
                             <li>Classe Client</b></li>
@@ -888,7 +897,6 @@
                                         }
                                 </script></code></pre>
                             </span>
-
                             résultat
                             <span style="font-size: 15px;">
                                 <pre data-id="code-animation">
@@ -904,6 +912,151 @@
                                 -----------------------------
                                 type : folder, name : folder2
                                 Les composants : pdfFile2, txtFile3,
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Behavioral : Strategy pattern</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>Objective : Définir une famille d'algorithmes, et encapsuler chacun et les rendre interchangeables tout en assurant 
+                                que chaque algorithme puisse évoluer indépendamment des clients qui l'utilisent.</li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>Structure : </li>
+                                            <img src="img/dp_strategy_structure.png" width="90%" height="90%">
+                                        </ul>
+                                    </td>
+                                    <td style="vertical-align: top;width: 50%;">
+                                        <ul>
+                                            <li>Exemple : </li>
+                                            <img src="img/dp_strategy_exemple.png" width="90%" height="90%">
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Behavioral : Strategy pattern (implémentation JAVA)</h5>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Interface SortStrategy</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public interface SortStrategy {
+                                            public void algorithm();
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe InsertionSort</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class InsertionSort implements SortStrategy{
+                                            @Override
+                                            public void algorithm() {
+                                                System.out.println("Insertion Sort");
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe SelectionSort</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class SelectionSort implements SortStrategy{                     
+                                            @Override
+                                            public void algorithm() {
+                                                System.out.println("Selection Sort");
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe Quicksort</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class Quicksort implements SortStrategy{
+                                            @Override
+                                            public void algorithm() {
+                                                System.out.println("Quick Sort");
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Behavioral : Strategy pattern (implémentation JAVA)</h5>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Classe Context</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class Context {
+                                            private SortStrategy sortStrategy;
+                                            public Context(SortStrategy sortStrategy) {
+                                                this.sortStrategy = sortStrategy;
+                                            }
+                                            public void setSortStrategy(SortStrategy sortStrategy) {
+                                                this.sortStrategy = sortStrategy;
+                                            }
+                                            public void operation() {
+                                                System.out.println("------ Starting Algorithm:");
+                                                this.sortStrategy.algorithm();
+                                                System.out.println("------ Ending Algorithm\n");
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe Client</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class Client {
+                                            public static void main(String[] args) {
+                                                SortStrategy sortStrategy = new InsertionSort();                    
+                                                Context context = new Context(sortStrategy);
+                                                context.operation();
+                                                
+                                                sortStrategy = new SelectionSort();
+                                                context.setSortStrategy(sortStrategy);
+                                                context.operation();
+                                                
+                                                sortStrategy = new Quicksort();
+                                                context.setSortStrategy(sortStrategy);
+                                                context.operation();
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                ------ Starting Algorithm:
+                                Insertion Sort
+                                ------ Ending Algorithm
+                                
+                                ------ Starting Algorithm:
+                                Selection Sort
+                                ------ Ending Algorithm
+                                
+                                ------ Starting Algorithm:
+                                Quick Sort
+                                ------ Ending Algorithm
                             </script></code></pre>
                             </span>
                         </ul>
