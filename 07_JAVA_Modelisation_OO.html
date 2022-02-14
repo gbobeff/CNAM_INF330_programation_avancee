@@ -586,6 +586,330 @@
                     </div>
                 </section>
             </section>
+            <section>
+                <section>
+                    <h4>UML : Outils en ligne</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);"><a href="https://www.diagrams.net/">diagrams.net</a></h5>
+                    <div>
+                        <ul>
+                            <li>Création d'un diagramme</li>
+                            <img src="img/tools_diagrams_net_creation_diagramme.png" width="70%" height="70%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Outils en ligne</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);"><a href="https://www.diagrams.net/">diagrams.net</a></h5>
+                    <div>
+                        <ul>
+                            <li>Sélection d'un diagramme de classes</li>
+                            <img src="img/tools_diagrams_net_selection_uml_classes.png" width="70%" height="70%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Outils en ligne</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);"><a href="https://www.diagrams.net/">diagrams.net</a></h5>
+                    <div>
+                        <ul>
+                            <li>Sélection d'un diagramme de séquences</li>
+                            <img src="img/tools_diagrams_net_selection_uml_sequences.png" width="70%" height="70%">
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>solution générale et réutilisable d’un problème récurrent</li>
+                            <li>un patron est nommé et décrit en détail dans un répertoire de patrons</li>
+                            <ul>
+                                <li>le livre <b style="color: rgb(186, 218, 8);">"Design Patterns, Elements of Reusable Object-Oriented Software de Gamma et al."</b>
+                                    (Gamma, Helm, Johnson et Vlissides ... gang of four) est à 
+                                    l'origine de l'utilisation de cette notion en informatique</li>
+                            </ul>
+                            <li>trois familles de patrons de conception</li>
+                            <ul>
+                                <li><b style="color: rgb(186, 218, 8);">Créateurs</b> (creational): ils définissent comment faire l'instanciation et la configuration des classes et des objets.</li>
+                                <ul>
+                                    <li>Singleton, Factory, Abstract Factory, Builder, Prototype, ...</li>
+                                </ul>
+                                <li><b style="color: rgb(186, 218, 8);">Structuraux</b> (structural): ils définissent comment organiser les classes d'un programme dans une structure plus large (séparant l'interface de l'implémentation).</li>
+                                <ul>
+                                    <li>Adapter, Composite, Decorater, Facade, Proxy, ...</li>
+                                </ul>
+                                <li><b style="color: rgb(186, 218, 8);">Comportementaux</b> (behavioral): ils définissent comment organiser les objets pour que ceux-ci collaborent (distribution des responsabilités) et expliquent le fonctionnement des algorithmes impliqués.</li>
+                                <ul>
+                                    <li>Observer, Strategy, State, Command, Iterator, ...</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Creational : Singleton</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>Objective : Garantir qu'une classe aura une seule instance et fournir un accès global à cette instance.</li>
+                            <li>Structure :</li>
+                            <img src="img/dp_singleton_structure.png" width="40%" height="40%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Creational : Singleton (implémentation JAVA)</h5>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Classe Connection</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class Connection {
+                                            private static Connection instance;
+                                            private static int counter = 0;
+                                            private Connection() {
+                                                counter++;
+                                            }
+                                            public static Connection getInstance() {
+                                                if(instance == null) {
+                                                    instance = new Connection();
+                                                }
+                                                return instance;
+                                            }
+                                            public void description() {
+                                                System.out.println("Connection........");
+                                                System.out.println("Nombre d'objets de type Connection instanciés : " + 
+                                                counter);
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe ClientConnection</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class ClientConnection {
+                                            public static void main(String[] args) {
+                                                Connection cnx1 = Connection.getInstance();
+                                                Connection cnx2 = Connection.getInstance();
+                                                
+                                                cnx1.description();
+                                                cnx2.description();
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            résultat
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                Connection........
+                                Nombre d'objets de type Connection instanciés : 1
+                                Connection........
+                                Nombre d'objets de type Connection instanciés : 1
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>Objective : Composer plusieurs objets dans une structure d'arbre pour représenter une hierarchie 
+                                en traitant les objets feuilles et composés de la meme façon.</li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <ul>
+                                            <li>Structure : </li>
+                                            <img src="img/dp_composite_structure.png" width="70%" height="70%">
+                                        </ul>
+                                    </td>
+                                    <td style="vertical-align: top;width: 50%;">
+                                        <ul>
+                                            <li>Exemple : </li>
+                                            <img src="img/dp_composite_exemple.png" width="70%" height="70%">
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite (implémentation JAVA)</h5>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Classe Component</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public abstract class Component {
+                                            private String type;
+                                            private String name;
+                                            public void add(Component component) {
+                                            }
+                                            public void remove(Component component) {
+                                            }
+                                            public Component getChild(int k) {
+                                                return null;
+                                            }
+                                            public String getType() {
+                                                return type;
+                                            }
+                                            public void setType(String type) {
+                                                this.type = type;
+                                            }
+                                            public String getName() {
+                                                return name;
+                                            }
+                                            public void setName(String name) {
+                                                this.name = name;
+                                            }
+                                            public abstract void description();
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe PdfFile</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class PdfFile extends Component{
+                                            public PdfFile(String name){
+                                                super.setType("pdf");
+                                                super.setName(name);
+                                            }
+                                            @Override
+                                            public void description() {
+                                                System.out.println("type : "+super.getType()+", name : "+super.getName());
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                            <li>Classe TextFile</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class TextFile extends Component{
+                                            public TextFile(String name) {
+                                                super.setType("txt");
+                                                super.setName(name);
+                                            }
+                                            @Override
+                                            public void description() {
+                                                System.out.println("type : "+super.getType()+", name : "+super.getName());
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite (implémentation JAVA)</h5>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Classe Component</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class Folder extends Component{
+                                            private List<Component> components;
+                                            public Folder(String name) {
+                                                super.setType("folder");
+                                                super.setName(name);
+                                                this.components = new ArrayList<>();
+                                            }
+                                            @Override
+                                            public void add(Component component) {
+                                                this.components.add(component);
+                                            }
+                                            @Override
+                                            public void remove(Component component) {
+                                                this.components.remove(component);
+                                            }
+                                            @Override
+                                            public Component getChild(int k) {
+                                                return this.components.get(k);
+                                            }
+                                            @Override
+                                            public void description() {
+                                                System.out.println("type : "+super.getType()+", name : "+super.getName());
+                                                // Afficher les noms de tous les composants du dossier
+                                                System.out.print("Les composants : ");
+                                                for(Component c: components) {
+                                                    System.out.print(c.getName()+", ");
+                                                }
+                                                System.out.println();
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>Patrons de conception (design pattern)</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Structural : Composite (implémentation JAVA)</h5>
+                    <div>
+                        <ul style="font-size: 20px;">
+                            <li>Classe Client</b></li>
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                                    <code class="hljs" data-trim data-line-numbers><script type="text/template">
+                                        public class Client {
+                                            public static void main(String[] args) {
+                                                Folder folder1 = new Folder("folder1");
+                                                
+                                                folder1.add(new TextFile("txtFile1"));
+                                                folder1.add(new TextFile("txtFile2"));
+                                                folder1.add(new PdfFile("pdfFile1"));
+                                                
+                                                folder1.getChild(0).description();
+                                                System.out.println("-----------------------------");
+                                                folder1.description();
+                                                System.out.println("-----------------------------");
+                                                Folder folder2 = new Folder("folder2");
+                                                folder2.add(new PdfFile("pdfFile2"));
+                                                folder1.description();
+                                                folder1.add(folder2);
+                                                System.out.println("-----------------------------");
+                                                folder1.getChild(3).add(new TextFile("txtFile3"));
+                                                folder2.description();
+                                            }
+                                        }
+                                </script></code></pre>
+                            </span>
+
+                            résultat
+                            <span style="font-size: 15px;">
+                                <pre data-id="code-animation">
+                            <code data-trim data-line-numbers><script type="text/template">
+                                CODE:
+                                type : txt, name : txtFile1
+                                -----------------------------
+                                type : folder, name : folder1
+                                Les composants : txtFile1, txtFile2, pdfFile1, 
+                                -----------------------------
+                                type : folder, name : folder1
+                                Les composants : txtFile1, txtFile2, pdfFile1, 
+                                -----------------------------
+                                type : folder, name : folder2
+                                Les composants : pdfFile2, txtFile3,
+                            </script></code></pre>
+                            </span>
+                        </ul>
+                    </div>
+                </section>
+            </section>
         </div>
     </div>
     <script src="dist/reveal.js"></script>
