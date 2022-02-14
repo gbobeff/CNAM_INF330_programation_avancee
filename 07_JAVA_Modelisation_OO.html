@@ -266,9 +266,284 @@
                     </table>
                     </div>
                 </section>
+            </section>
+            <section>
                 <section>
                     <h4>UML : Diagramme de classes</h4>
                     <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li>Un diagramme de classes est un graphe d'éléments connectés par des relations.</li>
+                            <li>Représentation détaillée d'une classe</li>
+                            <img src="img/classe_detaillee.png" width="30%" height="30%">
+                            <li>Représentation simplifiée</li>
+                            <img src="img/classe_simplifiee.png" width="30%" height="30%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Variables d'instances ou de classe</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>une classe peut contenir des variables d'instances ou de classe (attributs)</li>
+                            <li>syntaxe : <b style="color: rgb(186, 218, 8);">[visibilité] nom : type [= valeur par défaut]</b></li>
+                            <ul>
+                                <li>visbilité</li>
+                                <ul>
+                                    <li>'+' pour public</li>
+                                    <li>'#' pour protected</li>
+                                    <li>'-' pour private</li>
+                                </ul>
+                                <li>type : UML définit son propre ensemble de types (Integer, Real, string, ...)</li>
+                            </ul>
+                            <li>une variable de classe est soulignée</li>
+                            <li>si la variable est calculée alors elle est préfixée par le caractère '/'</li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="img/classe_BankAccount_var-instances.png" width="60%" height="60%">
+                                    </td>
+                                    <td style="vertical-align: top;width: 50%;"  >
+                                        <span style="font-size: 18px;">
+                                            <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+                                                public class BankAccount {
+                    
+                                                    int balance = 0;
+                                            
+                                                    double earnedInt;
+                                                    
+                                                    double interestRate;
+
+                                                    public String EXCEPTION_MESSAGE_FORMAT = 
+                                                            "Invalid operation (%s) value (value:%s)";
+                                                    ...
+                                                }
+                                            </code></pre>
+                                        </span>	
+                                    </td>
+                                </tr>
+                            </table>	
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Méthodes d'instances ou de classe</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>une classe peut contenir des méthodes d'instances ou de classe (opérations)</li>
+                            <li>syntaxe : <b style="color: rgb(186, 218, 8);">[visibilité] nom(paramètres) : type de retour </b></li>
+                            <ul>
+                                <li>visbilité</li>
+                                <ul>
+                                    <li>'+' pour public</li>
+                                    <li>'#' pour protected</li>
+                                    <li>'-' pour private</li>
+                                </ul>
+                                <li>paramètres => nom : type</li>
+                                <li>type : UML définit son propre ensemble de types (Integer, Real, string, ...)</li>
+                            </ul>
+                            <li>une méthode de classe est soulignée</li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="img/classe_BankAccount_methods.png" width="60%" height="60%">
+                                    </td>
+                                    <td style="vertical-align: top;width: 50%;"  >
+                                        <span style="font-size: 18px;">
+                                            <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+                                                public class BankAccount {
+                    
+                                                    int balance = 0;
+                                            
+                                                    double earnedInt;
+                                                    
+                                                    double interestRate;
+
+                                                    public String EXCEPTION_MESSAGE_FORMAT = 
+                                                            "Invalid operation (%s) value (value:%s)";
+
+                                                    public void deposit(double amount) {
+                                                        ...
+                                                    }
+                                                    
+                                                    public void withdraw(double amount) {
+                                                        ...
+                                                    }
+                                                    
+                                                    private double updateInterest() {
+                                                        ...
+                                                    }
+                                                }
+                                            </code></pre>
+                                        </span>	
+                                    </td>
+                                </tr>
+                            </table>	
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Associations</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>une association est un lien stable (persistant) entre deux objets</li>
+                            <li>une association est composée de deux extrêmes (ends)</li>
+                            <li>un extrême est paramétré par :</li>
+                            <ul>
+                                <li>un nom (le rôle joué par l'entité connectée)</li>
+                                <li>une cardinalité (0, 1, *, 1..* , </li>
+                                <li>un genre d'agrégation (composite, aggregation, aucun)</li>
+                            </ul>
+                            <li>notation : </li>
+                            <img src="img/diag_classes_association_notation.png" width="70%" height="70%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Navigabilité</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>le moyen d'accéder aux propriétés (variables et méthodes) d'autres objets à travers le graph d'objets représentant l'application</li>
+                            <li>représentée par une fleche</li>
+                            <img src="img/diag_classes_navigabilite.png" width="50%" height="50%">
+                            <ul>
+                                <li>un cours est suivi par plusieurs élèves (0 ou plusieurs)</li>
+                                <li>un élève suit des cours (0 ou plusieurs) </li>
+                                <li>à partir d'un élève, il est possible d'identifier les cours suivis (navigable) mais aussi le contenu des cours (chapitres)</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Navigabilité - Génération de code</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>l'impact de la navigabilité et des noms de rôles sur la génération de code</li>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="img/diag_classes_navigabilite.png" width="70%" height="70%">
+                                    </td>
+                                    <td style="vertical-align: top;width: 50%;"  >
+                                        <span style="font-size: 18px;">
+                                            <pre data-id="code-animation"><code class="hljs" data-trim data-line-numbers>
+                                                public class Eleves {
+
+                                                    public Eleve() { ... }
+                    
+                                                    public Cours[] coursPris() { ... }
+                                                }
+
+                                                public class Cours {
+                                                    
+                                                    public Cours() { ... }
+                    
+                                                    public Chapitre[] chapitres() { ... }
+                                                }
+
+                                                public class Chapitre {
+                    
+                                                    public Chapitre() { ... }
+                                                }
+                                            </code></pre>
+                                        </span>	
+                                    </td>
+                                </tr>
+                            </table>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Agrégation & Composition</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>notion de "est composé de", "contient", "est construit à partir de", "est formé de", ...</li>
+                            <li>renforce la sémantique de l'association</li>
+                            <li>agrégation :</li>
+                            <ul>
+                                <li>exprime une association faible (partagée)</li>
+                                <li>un composant peut faire partie de plusieurs composites</li>
+                                <li>le cyle de vie du composant n'est pas lié à celui du composite : si le composite est détruit, les composants restent</li>
+                            </ul>
+                            <li>composition :</li>
+                            <ul>
+                                <li>exprime une association forte (n'est pas partagée)</li>
+                                <li>un composant ne fait partie que d'un seul composite</li>
+                                <li>le cyle de vie du composant est lié à celui du composite</li>
+                            </ul>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Agrégation & Composition : notation</h5>
+                    <div>
+                        
+                        <img src="img/diag_classes_agregation-composition.png" width="50%" height="50%">
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Généralisation (Héritage)</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>c'est une relation et non pas un type d'association</li>
+                            <li>permet de partager les points communs (variables, méthodes et associations)</li>
+                            <li>peut être simple ou multiple</li>
+                            <li>notation  : </li>
+                            <img src="img/diag_classes_heritage_notation.png" width="50%" height="50%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Généralisation : Héritage des associations</h5>
+                    <div>
+                            <img src="img/diag_classes_heritage_associations.png" width="50%" height="50%">
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Généralisation : Classes et méthodes abstraites</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>une classe abstraite est une classe qui contient au moins une méthode abstraite</li>
+                            <li>une méthode abstraite est une méthode dont l'implémentation est laissée aux classes filles</li>
+                            <li>notation  : </li>
+                            <img src="img/diag_classes_abstraites.png" width="50%" height="50%">
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h4>UML : Diagramme de classes</h4>
+                    <h5 style="font-size: 30px;color: rgb(186, 218, 8);">Les interfaces</h5>
+                    <div>
+                        <ul style="font-size: 20px;text-align: left;">
+                            <li>ensemble de méthodes sans implémentation : juste la signature</li>
+                            <li>peut être vue comme une classe abstraite dont toutes les méthodes sont abstraites</li>
+                            <li>une classe peut "réaliser" une ou plusieurs interfaces</li>
+                            <li>notation  : </li>
+                            <img src="img/diag_classes_interfaces.png" width="50%" height="50%">
+                        </ul>
+                    </div>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h4>UML : Diagramme de séquences</h4>
+                    <div>
+                        <ul style="font-size: 30px;text-align: left;">
+                            <li>Un diagramme de classes est un graphe d'éléments connectés par des relations.</li>
+                            <li>Représentation détaillée d'une classe</li>
+                            <img src="img/classe_detaillee.png" width="30%" height="30%">
+                            <li>Représentation simplifiée</li>
+                            <img src="img/classe_simplifiee.png" width="30%" height="30%">
+                        </ul>
                     </div>
                 </section>
             </section>
