@@ -79,6 +79,33 @@
 				</section>
 				<section>
 					<h4>Copie locale du répôt</h4>
+					<h2 style="font-size: 16px; font-family: 'Courier New', Courier, monospace;">git clone [url-répot]</h2>
+					<ul style="font-size: 20px;">
+						<li>Copier l'URL du dépôt</li>
+						<img src="img/tuto_git_classroom/select_repot_pour_checkout.png" width="20%" height="20%">
+						<li>Créer une copie locale (clone)</li>
+						<span style="font-size: 16px;">
+							<pre data-id="code-animation">
+								<code class="hljs" data-trim>
+									$ git clone https://github.com/GISMAR-S-A-R-L/tp0-language-java---concepts-de-base-gustavobobeff.git
+									Cloning into 'tp0-language-java---concepts-de-base-gustavobobeff'...
+									remote: Enumerating objects: 9, done.
+									remote: Counting objects: 100% (9/9), done.
+									remote: Compressing objects: 100% (6/6), done.
+									remote: Total 9 (delta 1), reused 3 (delta 0), pack-reused 0
+									Receiving objects: 100% (9/9), done.
+									Resolving deltas: 100% (1/1), done.
+									$ ll tp0-language-java---concepts-de-base-gustavobobeff
+									total 1
+									-rw-r--r-- 1 gismarsarl 197121 18 Nov 15 00:14 README.md
+								</code>
+							</pre>
+						</span>
+					</ul>
+				</section>
+				<section>
+					<h4>Valider les changements sur la copie locale</h4>
+					<h2 style="font-size: 16px; font-family: 'Courier New', Courier, monospace;">git commit -m "message du commit"</h2>
 					<ul style="font-size: 20px;">
 						<li>Copier l'URL du dépôt</li>
 						<img src="img/tuto_git_classroom/select_repot_pour_checkout.png" width="20%" height="20%">
